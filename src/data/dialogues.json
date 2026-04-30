@@ -1,0 +1,217 @@
+[
+  {
+    "id": "dlg-g1",
+    "scenario": "greetings",
+    "prompt": "Bună ziua!",
+    "promptEn": "Good afternoon! (standard greeting)",
+    "responses": [
+      { "ro": "Bună ziua!", "en": "Good afternoon!" },
+      { "ro": "Bună!", "en": "Hello!" },
+      { "ro": "Salut!", "en": "Hi!" }
+    ]
+  },
+  {
+    "id": "dlg-g2",
+    "scenario": "greetings",
+    "prompt": "Ce mai faci?",
+    "promptEn": "How are you?",
+    "responses": [
+      { "ro": "Bine, și tu?", "en": "Fine, and you?" },
+      { "ro": "Bine, mulțumesc.", "en": "Fine, thank you." },
+      { "ro": "Bine.", "en": "Fine." }
+    ],
+    "note": "Any of these works naturally. 'Bine, și tu?' is the most conversational."
+  },
+  {
+    "id": "dlg-g3",
+    "scenario": "greetings",
+    "prompt": "Cum te numești?",
+    "promptEn": "What's your name?",
+    "responses": [
+      { "ro": "Mă numesc Diana.", "en": "My name is Diana." },
+      { "ro": "Diana.", "en": "Diana." }
+    ]
+  },
+  {
+    "id": "dlg-g4",
+    "scenario": "greetings",
+    "prompt": "Îmi pare bine!",
+    "promptEn": "Nice to meet you!",
+    "responses": [
+      { "ro": "Și mie!", "en": "Nice to meet you too! (lit. 'and me!')" },
+      { "ro": "Îmi pare bine și mie!", "en": "Nice to meet you too!" }
+    ]
+  },
+  {
+    "id": "dlg-g5",
+    "scenario": "greetings",
+    "prompt": "La revedere!",
+    "promptEn": "Goodbye!",
+    "responses": [
+      { "ro": "La revedere!", "en": "Goodbye!" },
+      { "ro": "Pa!", "en": "Bye!" },
+      { "ro": "Pe curând!", "en": "See you soon!" }
+    ]
+  },
+  {
+    "id": "dlg-g6",
+    "scenario": "greetings",
+    "prompt": "O zi bună!",
+    "promptEn": "Have a nice day! (shopkeeper sending you off)",
+    "responses": [
+      { "ro": "Mulțumesc, și dumneavoastră!", "en": "Thank you, you too! (formal)" },
+      { "ro": "Mulțumesc!", "en": "Thank you!" }
+    ],
+    "note": "You'll hear this constantly from shopkeepers. The polite reply uses 'dumneavoastră' (formal you)."
+  },
+  {
+    "id": "dlg-c1",
+    "scenario": "customs",
+    "prompt": "Pașaportul, vă rog.",
+    "promptEn": "Passport, please. (customs officer)",
+    "responses": [
+      { "ro": "Poftiți.", "en": "Here you are." },
+      { "ro": "Acesta este pașaportul meu.", "en": "This is my passport." }
+    ]
+  },
+  {
+    "id": "dlg-c2",
+    "scenario": "customs",
+    "prompt": "Cât timp rămâneți?",
+    "promptEn": "How long are you staying?",
+    "responses": [
+      { "ro": "O săptămână.", "en": "One week." },
+      { "ro": "Câteva zile.", "en": "A few days." },
+      { "ro": "Zece zile.", "en": "Ten days." }
+    ]
+  },
+  {
+    "id": "dlg-c3",
+    "scenario": "customs",
+    "prompt": "Care este scopul vizitei?",
+    "promptEn": "What is the purpose of your visit?",
+    "responses": [
+      { "ro": "Turism.", "en": "Tourism." },
+      { "ro": "Sunt aici pentru turism.", "en": "I'm here for tourism." }
+    ]
+  },
+  {
+    "id": "dlg-s1",
+    "scenario": "shop",
+    "prompt": "Cu ce vă pot ajuta?",
+    "promptEn": "How can I help you?",
+    "responses": [
+      { "ro": "Aș dori apă, vă rog.", "en": "I'd like water, please." },
+      { "ro": "Căutam pâine.", "en": "I was looking for bread." },
+      { "ro": "Mulțumesc, mă uit.", "en": "Thank you, I'm just looking." }
+    ],
+    "note": "'Mă uit' = I'm looking/browsing. Useful to know so you're not pressured."
+  },
+  {
+    "id": "dlg-s2",
+    "scenario": "shop",
+    "prompt": "Doriți ceva altceva?",
+    "promptEn": "Would you like anything else?",
+    "responses": [
+      { "ro": "Nu, mulțumesc.", "en": "No, thank you." },
+      { "ro": "Da, aș mai dori o apă.", "en": "Yes, I'd also like a water." }
+    ]
+  },
+  {
+    "id": "dlg-s3",
+    "scenario": "shop",
+    "prompt": "Cum plătiți?",
+    "promptEn": "How are you paying?",
+    "responses": [
+      { "ro": "Cu cardul.", "en": "By card." },
+      { "ro": "Cu numerar.", "en": "Cash." }
+    ]
+  },
+  {
+    "id": "dlg-r1",
+    "scenario": "restaurant",
+    "prompt": "Bună seara! Câte persoane?",
+    "promptEn": "Good evening! How many people?",
+    "responses": [
+      { "ro": "Două persoane, vă rog.", "en": "Two people, please." },
+      { "ro": "Doar eu.", "en": "Just me." }
+    ]
+  },
+  {
+    "id": "dlg-r2",
+    "scenario": "restaurant",
+    "prompt": "Ce vă aduc?",
+    "promptEn": "What can I bring you?",
+    "responses": [
+      { "ro": "Meniul, vă rog.", "en": "The menu, please." },
+      { "ro": "O cafea și apă plată, vă rog.", "en": "A coffee and still water, please." }
+    ]
+  },
+
+  {
+    "id": "dlg-b1",
+    "scenario": "bank",
+    "prompt": "Bună ziua! Cu ce vă pot ajuta?",
+    "promptEn": "Hello! How can I help you?",
+    "responses": [
+      { "ro": "Vreau să schimb bani.", "en": "I want to exchange money." },
+      { "ro": "Vreau să retrag bani.", "en": "I want to withdraw money." },
+      { "ro": "Vreau să deschid un cont.", "en": "I want to open an account." }
+    ],
+    "note": "Standard bank greeting. Pick response that fits your errand."
+  },
+  {
+    "id": "dlg-b2",
+    "scenario": "bank",
+    "prompt": "Aveți act de identitate?",
+    "promptEn": "Do you have an ID?",
+    "responses": [
+      { "ro": "Da, iată buletinul meu.", "en": "Yes, here is my ID card." },
+      { "ro": "Da, iată pașaportul meu.", "en": "Yes, here is my passport." }
+    ],
+    "note": "Banks always ask. 'Iată' = here is."
+  },
+  {
+    "id": "dlg-b3",
+    "scenario": "bank",
+    "prompt": "Cum doriți banii — bancnote mari sau mici?",
+    "promptEn": "How do you want the money — large or small bills?",
+    "responses": [
+      { "ro": "Bancnote mici, vă rog.", "en": "Small bills, please." },
+      { "ro": "Nu contează.", "en": "It doesn't matter." }
+    ]
+  },
+
+  {
+    "id": "dlg-d1",
+    "scenario": "documents",
+    "prompt": "Bună ziua! Vă pot ajuta?",
+    "promptEn": "Hello! Can I help you?",
+    "responses": [
+      { "ro": "Vreau să îmi reînnoiesc buletinul.", "en": "I want to renew my ID card." },
+      { "ro": "Vreau să fac o programare.", "en": "I want to make an appointment." }
+    ]
+  },
+  {
+    "id": "dlg-d2",
+    "scenario": "documents",
+    "prompt": "Ce acte aveți la dumneavoastră?",
+    "promptEn": "What documents do you have with you?",
+    "responses": [
+      { "ro": "Iată documentele mele.", "en": "Here are my documents." },
+      { "ro": "Am buletinul și o fotografie.", "en": "I have my ID and a photo." }
+    ],
+    "note": "'La dumneavoastră' = formal 'on you / with you'. Very common in official settings."
+  },
+  {
+    "id": "dlg-d3",
+    "scenario": "documents",
+    "prompt": "Câte zile durează procesarea?",
+    "promptEn": "How many days does processing take?",
+    "responses": [
+      { "ro": "Mulțumesc frumos pentru ajutor.", "en": "Thank you very much for your help." },
+      { "ro": "Înțeleg. Mulțumesc.", "en": "I understand. Thank you." }
+    ],
+    "note": "You're responding after they tell you the timeline."
+  }
+]

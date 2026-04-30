@@ -1,0 +1,736 @@
+[
+  {
+    "id": "g01",
+    "scenario": "greetings",
+    "ro": "Bună ziua.",
+    "en": "Hello. (formal, lit. 'good day')",
+    "ru": "Здравствуйте.",
+    "note": "Default polite greeting. Use with strangers, shopkeepers, officials. Informal version: just 'Bună.'"
+  },
+  {
+    "id": "g02",
+    "scenario": "greetings",
+    "ro": "Salut.",
+    "en": "Hi. (casual)",
+    "ru": "Привет.",
+    "note": "Friends and peers only. Don't say this at customs."
+  },
+  {
+    "id": "g03",
+    "scenario": "greetings",
+    "ro": "La revedere.",
+    "en": "Goodbye.",
+    "ru": "До свидания."
+  },
+  {
+    "id": "g04",
+    "scenario": "greetings",
+    "ro": "Mulțumesc.",
+    "en": "Thank you.",
+    "ru": "Спасибо.",
+    "note": "Add 'mult' for 'thanks a lot': 'Mulțumesc mult.'"
+  },
+  {
+    "id": "g05",
+    "scenario": "greetings",
+    "ro": "Vă rog.",
+    "en": "Please. / You're welcome.",
+    "ru": "Пожалуйста.",
+    "note": "Polite form. Informal is 'te rog'. Literally 'I ask you'."
+  },
+  {
+    "id": "g06",
+    "scenario": "greetings",
+    "ro": "Cu plăcere.",
+    "en": "You're welcome. (lit. 'with pleasure')",
+    "ru": "Пожалуйста. / С удовольствием."
+  },
+  {
+    "id": "g07",
+    "scenario": "greetings",
+    "ro": "Mă scuzați.",
+    "en": "Excuse me. (formal)",
+    "ru": "Извините.",
+    "note": "Use to get attention or apologize. Informal: 'scuză-mă'."
+  },
+  {
+    "id": "g08",
+    "scenario": "greetings",
+    "ro": "Îmi pare rău.",
+    "en": "I'm sorry.",
+    "ru": "Мне жаль. / Извините.",
+    "note": "Lit. 'it seems bad to me'. Use for genuine apology, not just bumping someone."
+  },
+  {
+    "id": "g09",
+    "scenario": "greetings",
+    "ro": "Da.",
+    "en": "Yes.",
+    "ru": "Да.",
+    "note": "Slavic loan — same word as Russian 'да'."
+  },
+  {
+    "id": "g10",
+    "scenario": "greetings",
+    "ro": "Nu.",
+    "en": "No.",
+    "ru": "Нет."
+  },
+
+  {
+    "id": "l01",
+    "scenario": "language",
+    "ro": "Vorbiți engleză?",
+    "en": "Do you speak English?",
+    "ru": "Вы говорите по-английски?",
+    "note": "Formal 'you'. 'Vorbiți' is the polite form of 'speak'."
+  },
+  {
+    "id": "l02",
+    "scenario": "language",
+    "ro": "Vorbiți rusă?",
+    "en": "Do you speak Russian?",
+    "ru": "Вы говорите по-русски?",
+    "note": "Useful in Moldova — Russian is widely understood."
+  },
+  {
+    "id": "l03",
+    "scenario": "language",
+    "ro": "Nu vorbesc românește.",
+    "en": "I don't speak Romanian.",
+    "ru": "Я не говорю по-румынски."
+  },
+  {
+    "id": "l04",
+    "scenario": "language",
+    "ro": "Vorbesc puțin.",
+    "en": "I speak a little.",
+    "ru": "Я говорю немного."
+  },
+  {
+    "id": "l05",
+    "scenario": "language",
+    "ro": "Nu înțeleg.",
+    "en": "I don't understand.",
+    "ru": "Я не понимаю."
+  },
+  {
+    "id": "l06",
+    "scenario": "language",
+    "ro": "Puteți să repetați, vă rog?",
+    "en": "Can you repeat, please?",
+    "ru": "Повторите, пожалуйста."
+  },
+  {
+    "id": "l07",
+    "scenario": "language",
+    "ro": "Puteți să vorbiți mai rar?",
+    "en": "Can you speak more slowly?",
+    "ru": "Можете говорить медленнее?"
+  },
+
+  {
+    "id": "c01",
+    "scenario": "customs",
+    "ro": "Sunt aici pentru turism.",
+    "en": "I'm here for tourism.",
+    "ru": "Я здесь как турист."
+  },
+  {
+    "id": "c02",
+    "scenario": "customs",
+    "ro": "Stau o săptămână.",
+    "en": "I'm staying one week.",
+    "ru": "Я остаюсь на неделю.",
+    "note": "Swap 'o săptămână' for 'două săptămâni' (two weeks) or 'zece zile' (ten days)."
+  },
+  {
+    "id": "c03",
+    "scenario": "customs",
+    "ro": "Acesta este pașaportul meu.",
+    "en": "This is my passport.",
+    "ru": "Вот мой паспорт.",
+    "note": "Definite article in Romanian is a SUFFIX: 'pașaport' → 'pașaportul' (the passport)."
+  },
+  {
+    "id": "c04",
+    "scenario": "customs",
+    "ro": "Nu am nimic de declarat.",
+    "en": "I have nothing to declare.",
+    "ru": "Мне нечего декларировать."
+  },
+  {
+    "id": "c05",
+    "scenario": "customs",
+    "ro": "Stau la un hotel.",
+    "en": "I'm staying at a hotel.",
+    "ru": "Я остановлюсь в отеле."
+  },
+
+  {
+    "id": "s01",
+    "scenario": "shop",
+    "ro": "Cât costă?",
+    "en": "How much does it cost?",
+    "ru": "Сколько стоит?"
+  },
+  {
+    "id": "s02",
+    "scenario": "shop",
+    "ro": "Aș dori asta, vă rog.",
+    "en": "I would like this, please.",
+    "ru": "Я бы хотел/а это, пожалуйста.",
+    "note": "'Aș dori' is the polite conditional 'I would like' — softer than 'vreau' (I want)."
+  },
+  {
+    "id": "s03",
+    "scenario": "shop",
+    "ro": "Aveți pâine?",
+    "en": "Do you have bread?",
+    "ru": "У вас есть хлеб?",
+    "note": "Swap 'pâine' for any item: apă (water), lapte (milk), ouă (eggs)."
+  },
+  {
+    "id": "s04",
+    "scenario": "shop",
+    "ro": "Unde este toaleta?",
+    "en": "Where is the toilet?",
+    "ru": "Где туалет?",
+    "note": "Note the suffix: 'toaletă' (a toilet) → 'toaleta' (the toilet)."
+  },
+  {
+    "id": "s05",
+    "scenario": "shop",
+    "ro": "Apă plată, vă rog.",
+    "en": "Still water, please.",
+    "ru": "Воду без газа, пожалуйста.",
+    "note": "'Apă plată' = still water; 'apă minerală' = sparkling. Important — defaults vary."
+  },
+  {
+    "id": "s06",
+    "scenario": "shop",
+    "ro": "O cafea, vă rog.",
+    "en": "A coffee, please.",
+    "ru": "Один кофе, пожалуйста.",
+    "note": "'O' is the indefinite article for feminine nouns; 'un' for masculine. 'Cafea' is feminine."
+  },
+  {
+    "id": "s07",
+    "scenario": "shop",
+    "ro": "Plătesc cu cardul.",
+    "en": "I'll pay by card.",
+    "ru": "Я плачу картой."
+  },
+  {
+    "id": "s08",
+    "scenario": "shop",
+    "ro": "Plătesc cu numerar.",
+    "en": "I'll pay in cash.",
+    "ru": "Я плачу наличными.",
+    "note": "Moldova: cash still common at markets, ATMs widely available in cities."
+  },
+  {
+    "id": "s09",
+    "scenario": "shop",
+    "ro": "Bonul, vă rog.",
+    "en": "The receipt, please.",
+    "ru": "Чек, пожалуйста."
+  },
+  {
+    "id": "s10",
+    "scenario": "shop",
+    "ro": "E prea scump.",
+    "en": "It's too expensive.",
+    "ru": "Это слишком дорого.",
+    "note": "Useful at markets where bargaining is OK; not at fixed-price shops."
+  },
+
+  {
+    "id": "r01",
+    "scenario": "restaurant",
+    "ro": "O masă pentru doi, vă rog.",
+    "en": "A table for two, please.",
+    "ru": "Столик на двоих, пожалуйста."
+  },
+  {
+    "id": "r02",
+    "scenario": "restaurant",
+    "ro": "Meniul, vă rog.",
+    "en": "The menu, please.",
+    "ru": "Меню, пожалуйста."
+  },
+  {
+    "id": "r03",
+    "scenario": "restaurant",
+    "ro": "Ce recomandați?",
+    "en": "What do you recommend?",
+    "ru": "Что вы рекомендуете?"
+  },
+  {
+    "id": "r04",
+    "scenario": "restaurant",
+    "ro": "Este foarte bun.",
+    "en": "It's very good.",
+    "ru": "Очень вкусно."
+  },
+  {
+    "id": "r05",
+    "scenario": "restaurant",
+    "ro": "Nota, vă rog.",
+    "en": "The bill, please.",
+    "ru": "Счёт, пожалуйста."
+  },
+
+  {
+    "id": "h01",
+    "scenario": "help",
+    "ro": "Ajutor!",
+    "en": "Help!",
+    "ru": "Помогите!"
+  },
+  {
+    "id": "h02",
+    "scenario": "help",
+    "ro": "Mă simt rău.",
+    "en": "I feel ill.",
+    "ru": "Мне плохо."
+  },
+  {
+    "id": "h03",
+    "scenario": "help",
+    "ro": "Aveți nevoie de ajutor?",
+    "en": "Do you need help?",
+    "ru": "Вам нужна помощь?",
+    "note": "Worth recognizing — someone may say this to you."
+  },
+  {
+    "id": "h04",
+    "scenario": "help",
+    "ro": "Unde este farmacia?",
+    "en": "Where is the pharmacy?",
+    "ru": "Где аптека?"
+  },
+  {
+    "id": "h05",
+    "scenario": "help",
+    "ro": "Sunați la poliție.",
+    "en": "Call the police.",
+    "ru": "Вызовите полицию."
+  },
+
+  {
+    "id": "num-0",
+    "scenario": "numbers",
+    "ro": "zero",
+    "en": "zero (0)",
+    "ru": "ноль"
+  },
+  {
+    "id": "num-1",
+    "scenario": "numbers",
+    "ro": "unu",
+    "en": "one (1)",
+    "ru": "один",
+    "note": "This is the counting form. With a noun, use 'un' (m) or 'o' (f): 'un leu', 'o cafea'."
+  },
+  {
+    "id": "num-2",
+    "scenario": "numbers",
+    "ro": "doi",
+    "en": "two (2)",
+    "ru": "два",
+    "note": "'Doi' is masculine. Feminine is 'două' — 'două cafele' (two coffees), 'două ape' (two waters). Gender of the noun determines which to use."
+  },
+  {
+    "id": "num-3",
+    "scenario": "numbers",
+    "ro": "trei",
+    "en": "three (3)",
+    "ru": "три"
+  },
+  {
+    "id": "num-4",
+    "scenario": "numbers",
+    "ro": "patru",
+    "en": "four (4)",
+    "ru": "четыре"
+  },
+  {
+    "id": "num-5",
+    "scenario": "numbers",
+    "ro": "cinci",
+    "en": "five (5)",
+    "ru": "пять"
+  },
+  {
+    "id": "num-6",
+    "scenario": "numbers",
+    "ro": "șase",
+    "en": "six (6)",
+    "ru": "шесть"
+  },
+  {
+    "id": "num-7",
+    "scenario": "numbers",
+    "ro": "șapte",
+    "en": "seven (7)",
+    "ru": "семь"
+  },
+  {
+    "id": "num-8",
+    "scenario": "numbers",
+    "ro": "opt",
+    "en": "eight (8)",
+    "ru": "восемь"
+  },
+  {
+    "id": "num-9",
+    "scenario": "numbers",
+    "ro": "nouă",
+    "en": "nine (9)",
+    "ru": "девять",
+    "note": "Same word as 'new' (feminine) — context decides which one is meant."
+  },
+  {
+    "id": "num-10",
+    "scenario": "numbers",
+    "ro": "zece",
+    "en": "ten (10)",
+    "ru": "десять"
+  },
+  {
+    "id": "num-11",
+    "scenario": "numbers",
+    "ro": "unsprezece",
+    "en": "eleven (11)",
+    "ru": "одиннадцать",
+    "note": "Often shortened to 'unșpe' in fast speech. Same goes for 12-19 (doișpe, treișpe, etc.)."
+  },
+  {
+    "id": "num-12",
+    "scenario": "numbers",
+    "ro": "doisprezece",
+    "en": "twelve (12)",
+    "ru": "двенадцать",
+    "note": "Spoken: often 'doișpe'. Time: 'ora doisprezece' = twelve o'clock."
+  },
+  {
+    "id": "num-15",
+    "scenario": "numbers",
+    "ro": "cincisprezece",
+    "en": "fifteen (15)",
+    "ru": "пятнадцать"
+  },
+  {
+    "id": "num-20",
+    "scenario": "numbers",
+    "ro": "douăzeci",
+    "en": "twenty (20)",
+    "ru": "двадцать",
+    "note": "Literally 'two tens'. From 20 upward, you need 'de' before a noun: 'douăzeci de lei' (20 lei)."
+  },
+  {
+    "id": "num-30",
+    "scenario": "numbers",
+    "ro": "treizeci",
+    "en": "thirty (30)",
+    "ru": "тридцать"
+  },
+  {
+    "id": "num-50",
+    "scenario": "numbers",
+    "ro": "cincizeci",
+    "en": "fifty (50)",
+    "ru": "пятьдесят"
+  },
+  {
+    "id": "num-100",
+    "scenario": "numbers",
+    "ro": "o sută",
+    "en": "one hundred (100)",
+    "ru": "сто",
+    "note": "Two hundred = 'două sute'. Five hundred = 'cinci sute'."
+  },
+  {
+    "id": "num-500",
+    "scenario": "numbers",
+    "ro": "cinci sute",
+    "en": "five hundred (500)",
+    "ru": "пятьсот"
+  },
+  {
+    "id": "num-1000",
+    "scenario": "numbers",
+    "ro": "o mie",
+    "en": "one thousand (1000)",
+    "ru": "тысяча",
+    "note": "In Moldova, prices over 1000 lei are common for hotels/groceries-for-the-week. Two thousand = 'două mii'."
+  },
+
+  {
+    "id": "p01",
+    "scenario": "shop",
+    "ro": "Costă zece lei.",
+    "en": "It costs 10 lei.",
+    "ru": "Стоит 10 леев.",
+    "note": "Numbers 1-19 connect directly to the noun: 'zece lei', 'cinci lei'. No 'de' needed."
+  },
+  {
+    "id": "p02",
+    "scenario": "shop",
+    "ro": "Costă douăzeci de lei.",
+    "en": "It costs 20 lei.",
+    "ru": "Стоит 20 леев.",
+    "note": "Important rule: from 20 upward, insert 'de' before the noun. 'Cincizeci de lei' (50), 'o sută de lei' (100). Without 'de' it sounds wrong."
+  },
+  {
+    "id": "p03",
+    "scenario": "shop",
+    "ro": "Costă o sută de lei.",
+    "en": "It costs 100 lei.",
+    "ru": "Стоит 100 леев."
+  },
+  {
+    "id": "p04",
+    "scenario": "shop",
+    "ro": "Două cafele, vă rog.",
+    "en": "Two coffees, please.",
+    "ru": "Два кофе, пожалуйста.",
+    "note": "Feminine 'două' because 'cafea' is feminine (plural 'cafele'). For masculine plurals use 'doi': 'doi pacienți' (two patients)."
+  },
+  {
+    "id": "p05",
+    "scenario": "shop",
+    "ro": "Cinci kilograme, vă rog.",
+    "en": "Five kilograms, please.",
+    "ru": "Пять килограмм, пожалуйста."
+  },
+  {
+    "id": "p06",
+    "scenario": "shop",
+    "ro": "Aveți rest?",
+    "en": "Do you have change?",
+    "ru": "У вас есть сдача?",
+    "note": "When paying cash with a big bill. 'Rest' = change owed back to you."
+  },
+
+  {
+    "id": "gr-dm",
+    "scenario": "greetings",
+    "ro": "Bună dimineața!",
+    "en": "Good morning!",
+    "ru": "Доброе утро!",
+    "note": "Used until about midday. 'Dimineață' = morning."
+  },
+  {
+    "id": "gr-bs",
+    "scenario": "greetings",
+    "ro": "Bună seara!",
+    "en": "Good evening!",
+    "ru": "Добрый вечер!",
+    "note": "Used after ~6pm. 'Seară' = evening."
+  },
+  {
+    "id": "gr-nb",
+    "scenario": "greetings",
+    "ro": "Noapte bună!",
+    "en": "Good night!",
+    "ru": "Спокойной ночи!"
+  },
+  {
+    "id": "gr-pb",
+    "scenario": "greetings",
+    "ro": "Îmi pare bine!",
+    "en": "Nice to meet you!",
+    "ru": "Приятно познакомиться!",
+    "note": "Literal: 'it seems good to me'. Said when meeting someone for the first time."
+  },
+  {
+    "id": "gr-ik",
+    "scenario": "greetings",
+    "ro": "Încântată de cunoștință!",
+    "en": "Pleased to meet you! (feminine speaker)",
+    "ru": "Очень приятно!",
+    "note": "'Încântată' is feminine. Men say 'Încântat'. You'd use 'Încântată' since you're a woman."
+  },
+  {
+    "id": "gr-cn",
+    "scenario": "greetings",
+    "ro": "Cum te numești?",
+    "en": "What's your name? (informal)",
+    "ru": "Как тебя зовут?",
+    "note": "Informal 'you'. Formal: 'Cum vă numiți?' Worth recognizing even if you won't ask it."
+  },
+  {
+    "id": "gr-mn",
+    "scenario": "greetings",
+    "ro": "Mă numesc Diana.",
+    "en": "My name is Diana.",
+    "ru": "Меня зовут Диана.",
+    "note": "Literally 'I call myself Diana'. More formal than 'Sunt Diana' (I am Diana)."
+  },
+  {
+    "id": "gr-cmf",
+    "scenario": "greetings",
+    "ro": "Ce mai faci?",
+    "en": "How are you? (casual, lit. 'what more are you doing?')",
+    "ru": "Как дела?",
+    "note": "Very common. Informal. The 'mai' softens it — not 'what are you doing' but a friendly check-in."
+  },
+  {
+    "id": "gr-bst",
+    "scenario": "greetings",
+    "ro": "Bine, și tu?",
+    "en": "Fine, and you?",
+    "ru": "Хорошо, а ты?",
+    "note": "Standard response to 'Ce mai faci?' Switch 'tu' to 'dumneavoastră' for formal: 'Bine, și dumneavoastră?'"
+  },
+  {
+    "id": "gr-mf",
+    "scenario": "greetings",
+    "ro": "Mulțumesc frumos!",
+    "en": "Thank you very much! (lit. 'thank you beautifully')",
+    "ru": "Большое спасибо!"
+  },
+  {
+    "id": "gr-pf",
+    "scenario": "greetings",
+    "ro": "Poftiți!",
+    "en": "Here you are! / Please, go ahead! / Come in!",
+    "ru": "Пожалуйста! / Прошу!",
+    "note": "Very versatile. Said when handing something over, inviting someone in, or telling someone to go ahead. You'll hear this a lot."
+  },
+  {
+    "id": "gr-pc",
+    "scenario": "greetings",
+    "ro": "Pe curând!",
+    "en": "See you soon!",
+    "ru": "До скорого!"
+  },
+  {
+    "id": "gr-nv",
+    "scenario": "greetings",
+    "ro": "Ne vedem mai târziu!",
+    "en": "See you later!",
+    "ru": "До позже! / Увидимся позже!"
+  },
+  {
+    "id": "gr-ozb",
+    "scenario": "greetings",
+    "ro": "O zi bună!",
+    "en": "Have a nice day!",
+    "ru": "Хорошего дня!",
+    "note": "Very common farewell in shops and offices. The polite reply is 'Mulțumesc, și dumneavoastră!'"
+  },
+  {
+    "id": "gr-osp",
+    "scenario": "greetings",
+    "ro": "O seară plăcută!",
+    "en": "Have a nice evening!",
+    "ru": "Приятного вечера!"
+  },
+  {
+    "id": "gr-pa",
+    "scenario": "greetings",
+    "ro": "Pa!",
+    "en": "Bye! (very casual)",
+    "ru": "Пока!"
+  },
+  {
+    "id": "gr-noroc",
+    "scenario": "greetings",
+    "ro": "Noroc!",
+    "en": "Cheers! / Good luck!",
+    "ru": "Ура! / Удачи!",
+    "note": "Used as a toast when drinking AND as a wish of good luck. Very Moldovan."
+  },
+  {
+    "id": "gr-bravo",
+    "scenario": "greetings",
+    "ro": "Bravo!",
+    "en": "Well done! / Good job!",
+    "ru": "Молодец! / Браво!"
+  },
+  {
+    "id": "gr-super",
+    "scenario": "greetings",
+    "ro": "Super!",
+    "en": "Great! / Awesome!",
+    "ru": "Супер!"
+  },
+
+  { "id": "day-1", "scenario": "time", "ro": "Luni", "en": "Monday", "ru": "Понедельник" },
+  { "id": "day-2", "scenario": "time", "ro": "Marți", "en": "Tuesday", "ru": "Вторник" },
+  { "id": "day-3", "scenario": "time", "ro": "Miercuri", "en": "Wednesday", "ru": "Среда" },
+  { "id": "day-4", "scenario": "time", "ro": "Joi", "en": "Thursday", "ru": "Четверг" },
+  { "id": "day-5", "scenario": "time", "ro": "Vineri", "en": "Friday", "ru": "Пятница" },
+  { "id": "day-6", "scenario": "time", "ro": "Sâmbătă", "en": "Saturday", "ru": "Суббота" },
+  { "id": "day-7", "scenario": "time", "ro": "Duminică", "en": "Sunday", "ru": "Воскресенье" },
+
+  { "id": "mon-1", "scenario": "time", "ro": "Ianuarie", "en": "January", "ru": "Январь" },
+  { "id": "mon-2", "scenario": "time", "ro": "Februarie", "en": "February", "ru": "Февраль" },
+  { "id": "mon-3", "scenario": "time", "ro": "Martie", "en": "March", "ru": "Март" },
+  { "id": "mon-4", "scenario": "time", "ro": "Aprilie", "en": "April", "ru": "Апрель" },
+  { "id": "mon-5", "scenario": "time", "ro": "Mai", "en": "May", "ru": "Май" },
+  { "id": "mon-6", "scenario": "time", "ro": "Iunie", "en": "June", "ru": "Июнь" },
+  { "id": "mon-7", "scenario": "time", "ro": "Iulie", "en": "July", "ru": "Июль", "note": "Your trip month! 'Pe primul iulie' = on July 1st." },
+  { "id": "mon-8", "scenario": "time", "ro": "August", "en": "August", "ru": "Август" },
+  { "id": "mon-9", "scenario": "time", "ro": "Septembrie", "en": "September", "ru": "Сентябрь" },
+  { "id": "mon-10", "scenario": "time", "ro": "Octombrie", "en": "October", "ru": "Октябрь" },
+  { "id": "mon-11", "scenario": "time", "ro": "Noiembrie", "en": "November", "ru": "Ноябрь" },
+  { "id": "mon-12", "scenario": "time", "ro": "Decembrie", "en": "December", "ru": "Decembrie" },
+
+  {
+    "id": "t01",
+    "scenario": "time",
+    "ro": "Azi este luni.",
+    "en": "Today is Monday.",
+    "ru": "Сегодня понедельник.",
+    "note": "Swap the day name as needed. 'Azi' = today, 'mâine' = tomorrow."
+  },
+  {
+    "id": "t02",
+    "scenario": "time",
+    "ro": "Rezervare pentru joi, vă rog.",
+    "en": "Reservation for Thursday, please.",
+    "ru": "Бронирование на четверг, пожалуйста."
+  },
+  {
+    "id": "t03",
+    "scenario": "time",
+    "ro": "Plec pe primul iulie.",
+    "en": "I'm leaving on July 1st.",
+    "ru": "Я уезжаю первого июля.",
+    "note": "Dates: 'pe primul' = on the first. 'Pe doi iulie' = on July 2nd."
+  },
+
+  { "id": "bk01", "scenario": "bank", "ro": "Vreau să schimb bani.", "en": "I want to exchange money.", "ru": "Я хочу обменять деньги." },
+  { "id": "bk02", "scenario": "bank", "ro": "Care este cursul de schimb?", "en": "What is the exchange rate?", "ru": "Какой курс обмена?", "note": "'Curs de schimb' = exchange rate. Ask this before exchanging — rates vary a lot between banks and exchange offices." },
+  { "id": "bk03", "scenario": "bank", "ro": "Vreau să deschid un cont.", "en": "I want to open an account.", "ru": "Я хочу открыть счёт." },
+  { "id": "bk04", "scenario": "bank", "ro": "Vreau să retrag bani.", "en": "I want to withdraw money.", "ru": "Я хочу снять деньги.", "note": "'A retrage' = to withdraw. ATM = 'bancomat'." },
+  { "id": "bk05", "scenario": "bank", "ro": "Vreau să depun bani.", "en": "I want to deposit money.", "ru": "Я хочу положить деньги на счёт." },
+  { "id": "bk06", "scenario": "bank", "ro": "Pot plăti cu cardul?", "en": "Can I pay by card?", "ru": "Могу ли я заплатить картой?", "note": "'Card' is used — same word as in English/Russian." },
+  { "id": "bk07", "scenario": "bank", "ro": "Unde este bancomatul cel mai apropiat?", "en": "Where is the nearest ATM?", "ru": "Где ближайший банкомат?", "note": "'Bancomat' = ATM. 'Cel mai apropiat' = nearest." },
+  { "id": "bk08", "scenario": "bank", "ro": "Care este comisionul?", "en": "What is the fee?", "ru": "Какая комиссия?" },
+  { "id": "bk09", "scenario": "bank", "ro": "Vreau să fac un transfer.", "en": "I want to make a transfer.", "ru": "Я хочу сделать перевод." },
+  { "id": "bk10", "scenario": "bank", "ro": "Câți lei primiți pe un dolar?", "en": "How many lei do you give per dollar?", "ru": "Сколько леев за доллар?", "note": "Direct way to ask the rate when exchanging USD. Swap 'dolar' for 'euro' as needed." },
+
+  { "id": "doc01", "scenario": "documents", "ro": "Vreau să îmi reînnoiesc buletinul.", "en": "I want to renew my ID card.", "ru": "Я хочу продлить удостоверение личности.", "note": "'Buletin' = Moldovan national ID card. 'A reînnoi' = to renew." },
+  { "id": "doc02", "scenario": "documents", "ro": "Ce acte am nevoie?", "en": "What documents do I need?", "ru": "Какие документы мне нужны?", "note": "'Acte' = documents/papers. Very useful at any government office." },
+  { "id": "doc03", "scenario": "documents", "ro": "Unde este ghișeul?", "en": "Where is the counter/window?", "ru": "Где окошко (стойка)?", "note": "'Ghișeu' = service window at a bank, post office, or government office." },
+  { "id": "doc04", "scenario": "documents", "ro": "Câte zile durează?", "en": "How many days does it take?", "ru": "Сколько дней это занимает?", "note": "'A dura' = to take (time). Can also say 'Cât durează?' = How long does it take?" },
+  { "id": "doc05", "scenario": "documents", "ro": "Trebuie să completez un formular?", "en": "Do I need to fill out a form?", "ru": "Мне нужно заполнить анкету?", "note": "'Formular' = form. 'A completa' = to fill in/out." },
+  { "id": "doc06", "scenario": "documents", "ro": "Am o programare la ora unsprezece.", "en": "I have an appointment at eleven o'clock.", "ru": "У меня запись на одиннадцать.", "note": "Swap the time as needed. 'Programare' = appointment/booking." },
+  { "id": "doc07", "scenario": "documents", "ro": "Pot face o programare online?", "en": "Can I make an appointment online?", "ru": "Могу ли я записаться онлайн?" },
+  { "id": "doc08", "scenario": "documents", "ro": "Pașaportul meu a expirat.", "en": "My passport has expired.", "ru": "Мой паспорт истёк.", "note": "'A expira' = to expire. Same for buletin: 'Buletinul meu a expirat.'" },
+  { "id": "doc09", "scenario": "documents", "ro": "Unde este primăria?", "en": "Where is the city hall?", "ru": "Где мэрия?", "note": "'Primărie' = city hall / municipal office. Many document services go through here." },
+  { "id": "doc10", "scenario": "documents", "ro": "Iată documentele mele.", "en": "Here are my documents.", "ru": "Вот мои документы.", "note": "'Iată' = here is / here are. Useful when handing papers to an official." },
+
+  { "id": "cx01", "scenario": "complex", "ro": "Mulțumesc frumos pentru ajutor.", "en": "Thank you very much for your help.", "ru": "Большое спасибо за помощь.", "note": "'Frumos' (beautiful) added after 'mulțumesc' makes it warmer — like 'thank you kindly'." },
+  { "id": "cx02", "scenario": "complex", "ro": "Nu am înțeles. Puteți repeta, vă rog?", "en": "I didn't understand. Can you repeat, please?", "ru": "Я не понял(а). Повторите, пожалуйста.", "note": "Combines 'nu înțeleg' (present) with perfect tense — 'nu am înțeles' = I didn't understand (just now)." },
+  { "id": "cx03", "scenario": "complex", "ro": "Pot să vă pun o întrebare?", "en": "May I ask you a question?", "ru": "Могу я задать вам вопрос?", "note": "Polite way to open a conversation with a stranger or official." },
+  { "id": "cx04", "scenario": "complex", "ro": "Îmi pare rău, am întârziat.", "en": "I'm sorry, I'm late.", "ru": "Извините, я опоздал(а).", "note": "'Îmi pare rău' = I'm sorry. 'A întârzia' = to be late." },
+  { "id": "cx05", "scenario": "complex", "ro": "Unde pot găsi un loc să mănânc?", "en": "Where can I find a place to eat?", "ru": "Где я могу найти место поесть?", "note": "'A găsi' = to find. 'A mânca' = to eat. 'Loc' = place." },
+  { "id": "cx06", "scenario": "complex", "ro": "Cât timp durează până la centru?", "en": "How long does it take to get to the center?", "ru": "Сколько времени до центра?", "note": "Building on time vocab. 'Centru' = city center. Swap for any destination." },
+  { "id": "cx07", "scenario": "complex", "ro": "Vorbiți română sau rusă?", "en": "Do you speak Romanian or Russian?", "ru": "Вы говорите по-румынски или по-русски?", "note": "Moldova is bilingual. Useful opener — many people are more comfortable in Russian." }
+]

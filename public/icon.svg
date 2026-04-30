@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#4a6b3a"/>
+  <text x="50%" y="56%" text-anchor="middle"
+        font-family="-apple-system, system-ui, sans-serif"
+        font-weight="600" font-size="240" fill="#faf7f2"
+        dominant-baseline="middle">Ro</text>
+</svg>
