@@ -85,6 +85,8 @@ html, body, #root {
 
 .footnote { font-size: 0.85rem; margin-top: 24px; text-align: center; }
 .hint { font-size: 0.9rem; margin: 0 0 16px; text-align: center; }
+.backup-row { display: flex; gap: 8px; margin-top: 16px; }
+.backup-row button { flex: 1; font-size: 0.85rem; padding: 10px 8px; }
 
 .session {
   display: flex;

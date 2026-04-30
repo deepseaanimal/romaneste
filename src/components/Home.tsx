@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import type { AppState } from "../types";
 import { isDue, isNew } from "../scheduler";
 import phrases from "../data/phrases.json";
@@ -8,6 +8,8 @@ import { greetings, pick } from "../copy";
 interface Props {
   state: AppState;
   onStart: () => void;
+  onExport: () => void;
+  onImport: (file: File) => void;
 }
 
 function daysUntil(targetIso: string): number {
@@ -24,8 +26,9 @@ function formatNextReview(ts: number): string {
   return `in ${days} day${days === 1 ? "" : "s"}`;
 }
 
-export function Home({ state, onStart }: Props) {
+export function Home({ state, onStart, onExport, onImport }: Props) {
   const greeting = useMemo(() => pick(greetings), []);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const stats = useMemo(() => {
     const now = Date.now();
@@ -102,6 +105,13 @@ export function Home({ state, onStart }: Props) {
         {stats.inDeck} of {stats.total} phrases &amp; exchanges introduced.
         Stop whenever you want — your progress is saved.
       </p>
+
+      <div className="backup-row">
+        <button className="ghost" onClick={onExport}>↓ Back up progress</button>
+        <button className="ghost" onClick={() => fileRef.current?.click()}>↑ Restore backup</button>
+        <input ref={fileRef} type="file" accept=".json" style={{ display: "none" }}
+          onChange={(e) => { const f = e.target.files?.[0]; if (f) onImport(f); e.target.value = ""; }} />
+      </div>
     </div>
   );
 }
