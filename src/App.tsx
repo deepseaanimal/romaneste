@@ -49,11 +49,16 @@ export default function App() {
     }
   }
 
+  function handleScenariosChange(s: import("./types").Scenario[]) {
+    setState(prev => ({ ...prev, activeScenarios: s }));
+  }
+
   return (
     <div className="app">
       {view === "home" && (
         <Home state={state} onStart={startSession}
-          onExport={handleExport} onImport={handleImport} />
+          onExport={handleExport} onImport={handleImport}
+          onScenariosChange={handleScenariosChange} />
       )}
       {view === "session" && (
         <Session state={state} onUpdate={setState} onExit={() => setView("home")} />

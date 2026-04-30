@@ -53,4 +53,5 @@ export interface AppState {
   newPerDay: number;
   reviewLimit: number;
   tripDate: string;
+  activeScenarios: Scenario[];
 }

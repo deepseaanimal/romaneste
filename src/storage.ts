@@ -1,9 +1,13 @@
-import type { AppState } from "./types";
+import type { AppState, Scenario } from "./types";
 import { newCard } from "./scheduler";
 import phrases from "./data/phrases.json";
 import dialogues from "./data/dialogues.json";
 
 const KEY = "romaneste-state-v1";
+
+const ALL_SCENARIOS: Scenario[] = [
+  "greetings","language","customs","shop","restaurant","help","numbers","time","bank","documents","complex"
+];
 
 const DEFAULT_STATE: AppState = {
   cards: {},
@@ -12,7 +16,25 @@ const DEFAULT_STATE: AppState = {
   newPerDay: 10,
   reviewLimit: 30,
   tripDate: "2026-07-01",
+  activeScenarios: ALL_SCENARIOS,
 };
+
+export function calcStreak(daysStudied: string[]): number {
+  if (!daysStudied.length) return 0;
+  const sorted = [...daysStudied].sort().reverse();
+  const today = todayKey();
+  const yesterday = todayKey(new Date(Date.now() - 86400000));
+  if (sorted[0] !== today && sorted[0] !== yesterday) return 0;
+  let streak = 1;
+  for (let i = 1; i < sorted.length; i++) {
+    const prev = todayKey(new Date(new Date(sorted[i - 1] + "T00:00:00").getTime() - 86400000));
+    if (sorted[i] === prev) streak++;
+    else break;
+  }
+  return streak;
+}
+
+export { ALL_SCENARIOS };
 
 export function load(): AppState {
   try {

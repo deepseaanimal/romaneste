@@ -1,15 +1,17 @@
-import { useMemo, useRef } from "react";
-import type { AppState } from "../types";
+import { useMemo, useRef, useState } from "react";
+import type { AppState, Scenario } from "../types";
 import { isDue, isNew } from "../scheduler";
 import phrases from "../data/phrases.json";
 import dialogues from "../data/dialogues.json";
 import { greetings, pick } from "../copy";
+import { calcStreak, ALL_SCENARIOS } from "../storage";
 
 interface Props {
   state: AppState;
   onStart: () => void;
   onExport: () => void;
   onImport: (file: File) => void;
+  onScenariosChange: (s: Scenario[]) => void;
 }
 
 function daysUntil(targetIso: string): number {
@@ -26,9 +28,25 @@ function formatNextReview(ts: number): string {
   return `in ${days} day${days === 1 ? "" : "s"}`;
 }
 
-export function Home({ state, onStart, onExport, onImport }: Props) {
+const SCENARIO_LABELS: Record<Scenario, string> = {
+  greetings: "Greetings",
+  language: "Language",
+  customs: "Customs",
+  shop: "Shopping",
+  restaurant: "Restaurant",
+  help: "Help",
+  numbers: "Numbers",
+  time: "Time",
+  bank: "Bank",
+  documents: "Documents",
+  complex: "Complex",
+};
+
+export function Home({ state, onStart, onExport, onImport, onScenariosChange }: Props) {
   const greeting = useMemo(() => pick(greetings), []);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [showFilter, setShowFilter] = useState(false);
+  const active = state.activeScenarios ?? ALL_SCENARIOS;
 
   const stats = useMemo(() => {
     const now = Date.now();
@@ -37,6 +55,7 @@ export function Home({ state, onStart, onExport, onImport }: Props) {
     let nextReviewAt = Infinity;
 
     for (const p of phrases) {
+      if (!active.includes(p.scenario as Scenario)) continue;
       const c = state.cards[p.id];
       if (!c) continue;
       if (!isNew(c)) {
@@ -46,6 +65,7 @@ export function Home({ state, onStart, onExport, onImport }: Props) {
       }
     }
     for (const d of dialogues) {
+      if (!active.includes(d.scenario as Scenario)) continue;
       const c = state.dlgCards?.[d.id];
       if (!c) continue;
       if (!isNew(c)) {
@@ -55,19 +75,28 @@ export function Home({ state, onStart, onExport, onImport }: Props) {
       }
     }
 
-    const newPhrases = phrases.filter((p) => isNew(state.cards[p.id])).length;
-    const newDlg = dialogues.filter((d) => isNew(state.dlgCards?.[d.id])).length;
-    // Match buildQueue: max(1, newPerDay-2) phrase slots + 2 dialogue slots
+    const newPhrases = phrases.filter((p) => active.includes(p.scenario as Scenario) && isNew(state.cards[p.id])).length;
+    const newDlg = dialogues.filter((d) => active.includes(d.scenario as Scenario) && isNew(state.dlgCards?.[d.id])).length;
     const newPhraseSlots = Math.min(Math.max(1, state.newPerDay - 2), newPhrases);
     const newDlgSlots = Math.min(2, newDlg);
     const newToday = newPhraseSlots + newDlgSlots;
+    const total = phrases.filter(p => active.includes(p.scenario as Scenario)).length
+                + dialogues.filter(d => active.includes(d.scenario as Scenario)).length;
 
-    return { dueNow, inDeck, nextReviewAt, newToday, total: phrases.length + dialogues.length };
-  }, [state]);
+    return { dueNow, inDeck, nextReviewAt, newToday, total };
+  }, [state, active]);
 
+  const streak = useMemo(() => calcStreak(state.daysStudied), [state.daysStudied]);
   const tripDays = daysUntil(state.tripDate);
   const sessionSize = stats.dueNow + Math.min(stats.newToday, state.newPerDay + 2);
   const hasWork = stats.dueNow > 0 || stats.newToday > 0;
+
+  function toggleScenario(s: Scenario) {
+    const next = active.includes(s)
+      ? active.length > 1 ? active.filter(x => x !== s) : active
+      : [...active, s];
+    onScenariosChange(next);
+  }
 
   return (
     <div className="home">
@@ -83,11 +112,15 @@ export function Home({ state, onStart, onExport, onImport }: Props) {
         </div>
         <div className="stat">
           <div className="stat-num">{stats.inDeck}</div>
-          <div className="stat-label">in your deck</div>
+          <div className="stat-label">in deck</div>
+        </div>
+        <div className="stat">
+          <div className="stat-num">{streak}</div>
+          <div className="stat-label">day streak</div>
         </div>
         <div className="stat">
           <div className="stat-num">{tripDays}</div>
-          <div className="stat-label">days to Moldova</div>
+          <div className="stat-label">days left</div>
         </div>
       </section>
 
@@ -100,6 +133,24 @@ export function Home({ state, onStart, onExport, onImport }: Props) {
           ? `Start session · ${sessionSize} card${sessionSize === 1 ? "" : "s"}`
           : "All caught up"}
       </button>
+
+      <button className="ghost filter-toggle" onClick={() => setShowFilter(v => !v)}>
+        {showFilter ? "▾" : "▸"} Topics {active.length < ALL_SCENARIOS.length ? `(${active.length}/${ALL_SCENARIOS.length})` : ""}
+      </button>
+
+      {showFilter && (
+        <div className="scenario-chips">
+          {ALL_SCENARIOS.map(s => (
+            <button
+              key={s}
+              className={`chip ${active.includes(s) ? "chip-on" : "chip-off"}`}
+              onClick={() => toggleScenario(s)}
+            >
+              {SCENARIO_LABELS[s]}
+            </button>
+          ))}
+        </div>
+      )}
 
       <p className="footnote muted">
         {stats.inDeck} of {stats.total} phrases &amp; exchanges introduced.

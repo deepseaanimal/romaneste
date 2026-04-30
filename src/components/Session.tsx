@@ -21,6 +21,7 @@ type QueueItem =
 
 function buildQueue(state: AppState): QueueItem[] {
   const now = Date.now();
+  const active = state.activeScenarios ?? [];
   const phraseById = new Map(phrases.map((p) => [p.id, p as Phrase]));
   const dlgById = new Map(dialogues.map((d) => [d.id, d as Dialogue]));
 
@@ -30,12 +31,14 @@ function buildQueue(state: AppState): QueueItem[] {
   const newDlg: CardState[] = [];
 
   for (const p of phrases) {
+    if (active.length && !active.includes(p.scenario as never)) continue;
     const c = state.cards[p.id];
     if (!c) continue;
     if (isNew(c)) newPhrases.push(c);
     else if (isDue(c, now)) duePhrases.push(c);
   }
   for (const d of dialogues) {
+    if (active.length && !active.includes(d.scenario as never)) continue;
     const c = state.dlgCards[d.id];
     if (!c) continue;
     if (isNew(c)) newDlg.push(c);
@@ -81,6 +84,8 @@ export function Session({ state, onUpdate, onExit }: Props) {
   const [showRu, setShowRu] = useState(false);
   const [showNote, setShowNote] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
+  const [correct, setCorrect] = useState(0);
+  const [graded, setGraded] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const farewell = useMemo(() => pick(allDoneToday), []);
@@ -106,9 +111,16 @@ export function Session({ state, onUpdate, onExit }: Props) {
   }, [index]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!current) {
+    const pct = graded > 0 ? Math.round((correct / graded) * 100) : null;
     return (
       <div className="session done">
         <h2>{farewell}</h2>
+        {pct !== null && (
+          <p className="accuracy-stat">
+            <span className="accuracy-num">{pct}%</span>
+            <span className="muted"> correct · {graded} card{graded === 1 ? "" : "s"}</span>
+          </p>
+        )}
         <button className="primary" onClick={onExit}>Back home</button>
       </div>
     );
@@ -122,6 +134,12 @@ export function Session({ state, onUpdate, onExit }: Props) {
       [cardKey]: { ...state[cardKey], [current.card.id]: updatedCard },
     };
     onUpdate(next);
+    // intro cards don't count toward accuracy
+    const isIntro = current.kind === "phrase" ? current.mode === "intro" : current.mode === "dlg-intro";
+    if (!isIntro) {
+      setGraded(n => n + 1);
+      if (g === "good" || g === "easy") setCorrect(n => n + 1);
+    }
     if (g === "again") {
       const reinsert: QueueItem = { ...current, card: updatedCard } as QueueItem;
       const newQueue = [...queue];
