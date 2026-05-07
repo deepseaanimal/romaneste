@@ -40,6 +40,8 @@ const SCENARIO_LABELS: Record<Scenario, string> = {
   bank: "Bank",
   documents: "Documents",
   complex: "Complex",
+  grammar: "Grammar",
+  intro: "Self-intro",
 };
 
 export function Home({ state, onStart, onExport, onImport, onScenariosChange }: Props) {

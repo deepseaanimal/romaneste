@@ -732,5 +732,37 @@
   { "id": "cx04", "scenario": "complex", "ro": "Îmi pare rău, am întârziat.", "en": "I'm sorry, I'm late.", "ru": "Извините, я опоздал(а).", "note": "'Îmi pare rău' = I'm sorry. 'A întârzia' = to be late." },
   { "id": "cx05", "scenario": "complex", "ro": "Unde pot găsi un loc să mănânc?", "en": "Where can I find a place to eat?", "ru": "Где я могу найти место поесть?", "note": "'A găsi' = to find. 'A mânca' = to eat. 'Loc' = place." },
   { "id": "cx06", "scenario": "complex", "ro": "Cât timp durează până la centru?", "en": "How long does it take to get to the center?", "ru": "Сколько времени до центра?", "note": "Building on time vocab. 'Centru' = city center. Swap for any destination." },
-  { "id": "cx07", "scenario": "complex", "ro": "Vorbiți română sau rusă?", "en": "Do you speak Romanian or Russian?", "ru": "Вы говорите по-румынски или по-русски?", "note": "Moldova is bilingual. Useful opener — many people are more comfortable in Russian." }
+  { "id": "cx07", "scenario": "complex", "ro": "Vorbiți română sau rusă?", "en": "Do you speak Romanian or Russian?", "ru": "Вы говорите по-румынски или по-русски?", "note": "Moldova is bilingual. Useful opener — many people are more comfortable in Russian." },
+
+  { "id": "num-13", "scenario": "numbers", "ro": "treisprezece", "en": "thirteen (13)", "ru": "тринадцать", "note": "Pattern: trei (3) + spre + zece (10) = 3 towards 10. All 11-19 follow this." },
+  { "id": "num-14", "scenario": "numbers", "ro": "paisprezece", "en": "fourteen (14)", "ru": "четырнадцать", "note": "'Pai' is a shortening of 'patru' (4). You'll hear both 'paisprezece' and 'patrusprezece'." },
+  { "id": "num-16", "scenario": "numbers", "ro": "șaisprezece", "en": "sixteen (16)", "ru": "шестнадцать", "note": "'Șai' from 'șase' (6). Romanians love contracting the teens." },
+  { "id": "num-17", "scenario": "numbers", "ro": "șaptesprezece", "en": "seventeen (17)", "ru": "семнадцать", "note": "Memory hook: șapte rhymes with lapte (milk). Șaptesprezece = 17." },
+  { "id": "num-18", "scenario": "numbers", "ro": "optsprezece", "en": "eighteen (18)", "ru": "восемнадцать" },
+  { "id": "num-19", "scenario": "numbers", "ro": "nouăsprezece", "en": "nineteen (19)", "ru": "девятнадцать", "note": "Also written 'nouă spre zece' — same thing. Your tutor wrote it as two words." },
+  { "id": "num-21", "scenario": "numbers", "ro": "douăzeci și unu", "en": "twenty-one (21)", "ru": "двадцать один", "note": "'Și' = and. All compound numbers from 21 onward use 'și': douăzeci și unu, douăzeci și doi..." },
+  { "id": "num-22", "scenario": "numbers", "ro": "douăzeci și doi", "en": "twenty-two (22)", "ru": "двадцать два", "note": "Notice 'doi' (masculine two) — matches a masculine noun. For feminine/neuter: 'douăzeci și două'." },
+  { "id": "num-40", "scenario": "numbers", "ro": "patruzeci", "en": "forty (40)", "ru": "сорок", "note": "patru (4) + zeci (tens). No surprises here." },
+  { "id": "num-60", "scenario": "numbers", "ro": "șaizeci", "en": "sixty (60)", "ru": "шестьдесят", "note": "'Șai' again — same contraction as in 16. Romanian hundreds are cleaner than the tens." },
+  { "id": "num-70", "scenario": "numbers", "ro": "șaptezeci", "en": "seventy (70)", "ru": "семьдесят" },
+  { "id": "num-80", "scenario": "numbers", "ro": "optzeci", "en": "eighty (80)", "ru": "восемьдесят" },
+  { "id": "num-90", "scenario": "numbers", "ro": "nouăzeci", "en": "ninety (90)", "ru": "девяносто" },
+
+  { "id": "si01", "scenario": "intro", "ro": "Eu sunt Diana.", "en": "I am Diana.", "ru": "Я — Диана.", "note": "Swap your name in. 'Eu sunt' = I am. Pronoun 'eu' often dropped in conversation — just 'Sunt Diana.' works too." },
+  { "id": "si02", "scenario": "intro", "ro": "Numele meu este Diana.", "en": "My name is Diana.", "ru": "Моё имя — Диана.", "note": "Word order is reversed vs English: 'numele meu' = 'name my'. Romanian puts the noun first, possessive second." },
+  { "id": "si03", "scenario": "intro", "ro": "Eu am treizeci și trei de ani.", "en": "I am 33 years old.", "ru": "Мне тридцать три года.", "note": "Romanian says 'I have X years', not 'I am X years old'. Notice 'de' before 'ani' — required from 20 upward." },
+  { "id": "si04", "scenario": "intro", "ro": "Câți ani ai?", "en": "How old are you?", "ru": "Сколько тебе лет?", "note": "Literal: 'How many years do you have?' Much more logical than English once you get used to it." },
+  { "id": "si05", "scenario": "intro", "ro": "Să ai o zi bună!", "en": "Have a good day!", "ru": "Хорошего тебе дня!", "note": "'Să ai' = subjunctive wish form — 'may you have'. 'Zi bună' alone (informal): you're stating the day is good. With 'Să ai' — you're wishing it." },
+  { "id": "si06", "scenario": "intro", "ro": "Zi bună!", "en": "Good day! (casual)", "ru": "Хорошего дня!", "note": "Shorter, casual. Difference from 'Bună ziua': 'Bună ziua' = greeting (hello). 'Zi bună' = parting wish (goodbye variant)." },
+  { "id": "si07", "scenario": "intro", "ro": "Îmi pare bine să te cunosc!", "en": "Nice to meet you!", "ru": "Рада с тобой познакомиться!", "note": "Literal: 'To me it seems good to know you'. 'Îmi pare' = it seems to me. 'Să te cunosc' = to know you." },
+
+  { "id": "gr01", "scenario": "grammar", "ro": "eu am", "en": "I have", "ru": "я имею", "note": "Drop 'eu' in speech — just say 'am'. Context always clear from ending." },
+  { "id": "gr02", "scenario": "grammar", "ro": "tu ai", "en": "you have (singular)", "ru": "ты имеешь", "note": "'Tu' optional but common for clarity. 'Ai' alone = you have." },
+  { "id": "gr03", "scenario": "grammar", "ro": "el are / ea are", "en": "he has / she has", "ru": "он имеет / она имеет", "note": "El = he, ea = she. Same verb form 'are' for both — Romanian simplifies here." },
+  { "id": "gr04", "scenario": "grammar", "ro": "noi avem", "en": "we have", "ru": "мы имеем", "note": "'Avem' — notice the stem shifts to 'av'. Keep 'noi' for clarity; dropping it can confuse listeners." },
+  { "id": "gr05", "scenario": "grammar", "ro": "voi aveți", "en": "you have (plural)", "ru": "вы имеете", "note": "'Voi' = you all. 'Aveți' is also the formal singular — you'd use this with a stranger or official instead of 'tu ai'." },
+  { "id": "gr06", "scenario": "grammar", "ro": "ei au / ele au", "en": "they have (masc/fem)", "ru": "они имеют", "note": "Ei = they (masculine/mixed group). Ele = they (all feminine). Same verb 'au' — nice and short." },
+  { "id": "gr07", "scenario": "grammar", "ro": "Am douăzeci și șapte de ani.", "en": "I am 27 years old.", "ru": "Мне двадцать семь лет.", "note": "No 'eu' needed — 'am' already means 'I have'. This is the natural way a Romanian would say it." },
+  { "id": "gr08", "scenario": "grammar", "ro": "Câți ani are ea?", "en": "How old is she?", "ru": "Сколько ей лет?", "note": "Combines 'câți ani' (how many years) + 'are' (she has) + 'ea' (she). Try swapping: 'Câți ani are el?' = How old is he?" },
+  { "id": "gr09", "scenario": "grammar", "ro": "Noi avem o rezervare.", "en": "We have a reservation.", "ru": "У нас есть бронь.", "note": "Puts 'avem' into context. Same pattern: 'Eu am un bilet' (I have a ticket), 'Tu ai timp?' (Do you have time?)." }
 ]

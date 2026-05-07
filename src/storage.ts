@@ -6,7 +6,7 @@ import dialogues from "./data/dialogues.json";
 const KEY = "romaneste-state-v1";
 
 const ALL_SCENARIOS: Scenario[] = [
-  "greetings","language","customs","shop","restaurant","help","numbers","time","bank","documents","complex"
+  "greetings","language","customs","shop","restaurant","help","numbers","time","bank","documents","complex","grammar","intro"
 ];
 
 const DEFAULT_STATE: AppState = {

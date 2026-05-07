@@ -9,7 +9,9 @@ export type Scenario =
   | "time"
   | "bank"
   | "documents"
-  | "complex";
+  | "complex"
+  | "grammar"
+  | "intro";
 
 export interface DialogueResponse {
   ro: string;

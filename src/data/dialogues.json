@@ -213,5 +213,64 @@
       { "ro": "Înțeleg. Mulțumesc.", "en": "I understand. Thank you." }
     ],
     "note": "You're responding after they tell you the timeline."
+  },
+
+  {
+    "id": "dlg-i1",
+    "scenario": "intro",
+    "prompt": "Cum te numești?",
+    "promptEn": "What's your name?",
+    "responses": [
+      { "ro": "Mă numesc Diana.", "en": "My name is Diana." },
+      { "ro": "Eu sunt Diana.", "en": "I am Diana." },
+      { "ro": "Numele meu este Diana.", "en": "My name is Diana. (formal)" }
+    ],
+    "note": "Three ways to say your name. 'Mă numesc' (I call myself) is the most natural. All three are correct."
+  },
+  {
+    "id": "dlg-i2",
+    "scenario": "intro",
+    "prompt": "Câți ani ai?",
+    "promptEn": "How old are you?",
+    "responses": [
+      { "ro": "Am treizeci și trei de ani.", "en": "I am 33 years old." },
+      { "ro": "Am douăzeci și șapte de ani.", "en": "I am 27 years old." }
+    ],
+    "note": "No 'eu' needed — 'am' already means 'I have'. Don't forget 'de' before 'ani' when the number is 20+."
+  },
+  {
+    "id": "dlg-i3",
+    "scenario": "intro",
+    "prompt": "De unde ești?",
+    "promptEn": "Where are you from?",
+    "responses": [
+      { "ro": "Sunt din Ucraina.", "en": "I'm from Ukraine." },
+      { "ro": "Sunt din Rusia.", "en": "I'm from Russia." },
+      { "ro": "Nu sunt de aici.", "en": "I'm not from here." }
+    ],
+    "note": "'De unde ești?' = where are you from? 'Sunt din...' = I'm from... Swap the country as needed."
+  },
+  {
+    "id": "dlg-gr1",
+    "scenario": "grammar",
+    "prompt": "Ai timp acum?",
+    "promptEn": "Do you have time now?",
+    "responses": [
+      { "ro": "Da, am timp.", "en": "Yes, I have time." },
+      { "ro": "Nu, nu am timp acum.", "en": "No, I don't have time now." },
+      { "ro": "Puțin.", "en": "A little." }
+    ],
+    "note": "Drills 'ai' (you have) and 'am' (I have). Negation: 'nu am' = I don't have. Simple."
+  },
+  {
+    "id": "dlg-gr2",
+    "scenario": "grammar",
+    "prompt": "Câți ani are Diana?",
+    "promptEn": "How old is Diana?",
+    "responses": [
+      { "ro": "Are treizeci și trei de ani.", "en": "She is 33 years old." },
+      { "ro": "Nu știu câți ani are.", "en": "I don't know how old she is." }
+    ],
+    "note": "Uses 'are' (he/she has). 'Nu știu' = I don't know. A useful phrase on its own too."
   }
 ]
