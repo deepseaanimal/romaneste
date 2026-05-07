@@ -94,6 +94,15 @@ html, body, #root {
 .chip-on { background: var(--accent); color: var(--bg); }
 .chip-off { background: var(--accent-soft); color: var(--muted); }
 
+.intro-prompt { margin: 0 0 8px; font-size: 0.95rem; }
+.hint-text { margin: 0 0 4px; font-size: 1rem; letter-spacing: 0.03em; }
+
+.recognize-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+.recognize-opt { padding: 14px 10px; font-size: 0.95rem; text-align: center; border-radius: 12px; background: var(--accent-soft); color: var(--fg); transition: background 0.15s; }
+.recognize-opt:disabled { cursor: default; }
+.opt-correct { background: rgba(74,107,58,0.25) !important; color: var(--good) !important; font-weight: 600; }
+.opt-wrong { background: rgba(176,74,74,0.2) !important; color: var(--again) !important; }
+
 .accuracy-stat { font-size: 1.1rem; margin: 0; }
 .accuracy-num { font-size: 2rem; font-weight: 700; color: var(--accent); }
 

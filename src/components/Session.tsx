@@ -12,7 +12,7 @@ interface Props {
   onExit: () => void;
 }
 
-type PhraseMode = "intro" | "type-ro" | "listen";
+type PhraseMode = "intro" | "recognize" | "type-ro" | "listen";
 type DlgMode = "dlg-intro" | "dlg-respond";
 
 type QueueItem =
@@ -48,32 +48,66 @@ function buildQueue(state: AppState): QueueItem[] {
   duePhrases.sort((a, b) => a.dueAt - b.dueAt);
   dueDlg.sort((a, b) => a.dueAt - b.dueAt);
 
-  // Budget: 3 new phrases + 2 new dialogues per session (total ~5 new)
   const newPhrasesToday = newPhrases.slice(0, Math.max(1, state.newPerDay - 2));
   const newDlgToday = newDlg.slice(0, 2);
   const reviewPhrases = duePhrases.slice(0, state.reviewLimit);
   const reviewDlg = dueDlg.slice(0, Math.floor(state.reviewLimit / 3));
 
+  // Warmup: 2 highest-ease reviews first (familiar = confidence boost)
+  const byEaseDesc = [...reviewPhrases].sort((a, b) => b.ease - a.ease);
+  const warmupIds = new Set(byEaseDesc.slice(0, Math.min(2, reviewPhrases.length)).map(c => c.id));
+  const warmupPhrases = reviewPhrases.filter(c => warmupIds.has(c.id));
+  const remainingReviews = reviewPhrases.filter(c => !warmupIds.has(c.id));
+
   const queue: QueueItem[] = [];
 
-  for (const c of reviewPhrases) {
+  // Warmup first
+  for (const c of warmupPhrases) {
     const p = phraseById.get(c.id)!;
     queue.push({ kind: "phrase", phrase: p, card: c, mode: c.reps % 2 === 0 ? "type-ro" : "listen" });
   }
+
+  // Build review pool
+  const reviewItems: QueueItem[] = [];
+  for (const c of remainingReviews) {
+    const p = phraseById.get(c.id)!;
+    reviewItems.push({ kind: "phrase", phrase: p, card: c, mode: c.reps % 2 === 0 ? "type-ro" : "listen" });
+  }
   for (const c of reviewDlg) {
     const d = dlgById.get(c.id)!;
-    queue.push({ kind: "dlg", dialogue: d, card: c, mode: "dlg-respond" });
+    reviewItems.push({ kind: "dlg", dialogue: d, card: c, mode: "dlg-respond" });
   }
+
+  // New items: intro + recognize for phrases, intro for dialogues
+  const newItems: QueueItem[] = [];
   for (const c of newPhrasesToday) {
     const p = phraseById.get(c.id)!;
-    queue.push({ kind: "phrase", phrase: p, card: c, mode: "intro" });
+    newItems.push({ kind: "phrase", phrase: p, card: c, mode: "intro" });
+    newItems.push({ kind: "phrase", phrase: p, card: c, mode: "recognize" });
   }
   for (const c of newDlgToday) {
     const d = dlgById.get(c.id)!;
-    queue.push({ kind: "dlg", dialogue: d, card: c, mode: "dlg-intro" });
+    newItems.push({ kind: "dlg", dialogue: d, card: c, mode: "dlg-intro" });
   }
 
+  // Interleave: every 3 reviews insert 1 new card
+  let newIdx = 0;
+  for (let i = 0; i < reviewItems.length; i++) {
+    queue.push(reviewItems[i]);
+    if ((i + 1) % 3 === 0 && newIdx < newItems.length) {
+      queue.push(newItems[newIdx++]);
+    }
+  }
+  while (newIdx < newItems.length) queue.push(newItems[newIdx++]);
+
   return queue;
+}
+
+function getRecognizeOptions(phrase: Phrase): string[] {
+  const pool = phrases.filter(p => p.id !== phrase.id && p.ro.split(" ").length <= 6);
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  const distractors = shuffled.slice(0, 3).map(p => p.ro);
+  return [phrase.ro, ...distractors].sort(() => Math.random() - 0.5);
 }
 
 export function Session({ state, onUpdate, onExit }: Props) {
@@ -86,6 +120,15 @@ export function Session({ state, onUpdate, onExit }: Props) {
   const [feedback, setFeedback] = useState<string | null>(null);
   const [correct, setCorrect] = useState(0);
   const [graded, setGraded] = useState(0);
+
+  // New UX states
+  const [introStep, setIntroStep] = useState(0);           // 0=listen 1=see-ro 2=see-en+go
+  const [listenPhase, setListenPhase] = useState<"listen" | "type">("listen");
+  const [hintCount, setHintCount] = useState(0);
+  const [dlgResponseCount, setDlgResponseCount] = useState(1);
+  const [recognizeOptions, setRecognizeOptions] = useState<string[]>([]);
+  const [recognizeChosen, setRecognizeChosen] = useState<string | null>(null);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const farewell = useMemo(() => pick(allDoneToday), []);
@@ -99,17 +142,31 @@ export function Session({ state, onUpdate, onExit }: Props) {
     setShowRu(false);
     setShowNote(false);
     setFeedback(null);
+    setIntroStep(0);
+    setListenPhase("listen");
+    setHintCount(0);
+    setDlgResponseCount(1);
+    setRecognizeChosen(null);
+
     if (!current) return;
+
+    if (current.kind === "phrase" && current.mode === "recognize") {
+      setRecognizeOptions(getRecognizeOptions(current.phrase));
+    }
+
+    // Auto-focus input for typing modes (not listen phase 1)
     const isTyping = current.kind === "phrase"
-      ? current.mode !== "intro"
+      ? current.mode === "type-ro"
       : current.mode === "dlg-respond";
     if (isTyping) setTimeout(() => inputRef.current?.focus(), 50);
-    const autoPlay = current.kind === "phrase"
-      ? current.mode === "listen"
-      : current.mode === "dlg-respond";
-    if (autoPlay) setTimeout(() => audioRef.current?.play().catch(() => {}), 150);
+
+    // Auto-play for intro (step 0) and dlg-respond
+    const autoPlay = (current.kind === "phrase" && current.mode === "intro") ||
+      (current.kind === "dlg" && current.mode === "dlg-respond");
+    if (autoPlay) setTimeout(() => audioRef.current?.play().catch(() => {}), 200);
   }, [index]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ── Done screen ────────────────────────────────────────────────
   if (!current) {
     const pct = graded > 0 ? Math.round((correct / graded) * 100) : null;
     return (
@@ -126,92 +183,193 @@ export function Session({ state, onUpdate, onExit }: Props) {
     );
   }
 
+  // ── Grading ────────────────────────────────────────────────────
   function grade(g: Grade, isDlg = false) {
     const cardKey = isDlg ? "dlgCards" : "cards";
     const updatedCard = applyGrade(current.card, g);
-    const next: AppState = {
-      ...state,
-      [cardKey]: { ...state[cardKey], [current.card.id]: updatedCard },
-    };
-    onUpdate(next);
-    // intro cards don't count toward accuracy
-    const isIntro = current.kind === "phrase" ? current.mode === "intro" : current.mode === "dlg-intro";
+    onUpdate({ ...state, [cardKey]: { ...state[cardKey], [current.card.id]: updatedCard } });
+    const isIntro = current.kind === "phrase"
+      ? (current.mode === "intro" || current.mode === "recognize")
+      : current.mode === "dlg-intro";
     if (!isIntro) {
       setGraded(n => n + 1);
       if (g === "good" || g === "easy") setCorrect(n => n + 1);
     }
     if (g === "again") {
-      const reinsert: QueueItem = { ...current, card: updatedCard } as QueueItem;
+      const reinsert = { ...current, card: updatedCard } as QueueItem;
       const newQueue = [...queue];
       newQueue.splice(Math.min(queue.length, index + 3), 0, reinsert);
       setQueue(newQueue);
     }
-    setIndex((i) => i + 1);
+    setIndex(i => i + 1);
   }
 
-  // ── Phrase: intro ──────────────────────────────────────────────
+  // Recognize: doesn't touch SM-2 state on correct, resets on wrong
+  function gradeRecognize(chosen: string) {
+    if (recognizeChosen) return;
+    setRecognizeChosen(chosen);
+    const correct_ = current.kind === "phrase" && current.mode === "recognize"
+      && chosen === current.phrase.ro;
+    setGraded(n => n + 1);
+    if (correct_) setCorrect(n => n + 1);
+    setTimeout(() => {
+      if (!correct_ && current.kind === "phrase") {
+        // Wrong: reinsert as recognize again + update card
+        const updatedCard = applyGrade(current.card, "again");
+        onUpdate({ ...state, cards: { ...state.cards, [current.card.id]: updatedCard } });
+        const reinsert = { ...current, card: updatedCard } as QueueItem;
+        const newQueue = [...queue];
+        newQueue.splice(Math.min(queue.length, index + 3), 0, reinsert);
+        setQueue(newQueue);
+      }
+      setIndex(i => i + 1);
+    }, 900);
+  }
+
+  const sessionHeader = (
+    <>
+      <button className="exit" onClick={onExit}>← exit</button>
+      <div className="progress">{index + 1} / {queue.length}</div>
+    </>
+  );
+
+  // ── Phrase: intro (3 micro-steps) ─────────────────────────────
   if (current.kind === "phrase" && current.mode === "intro") {
     const { phrase } = current;
     const src = `${base}audio/${phrase.id}.m4a`;
     return (
       <div className="session">
-        <button className="exit" onClick={onExit}>← exit</button>
-        <div className="progress">{index + 1} / {queue.length}</div>
+        {sessionHeader}
         <audio ref={audioRef} src={src} preload="auto" playsInline />
         <div className="card intro">
           <div className="badge">new phrase</div>
-          <div className="ro big">{phrase.ro}</div>
-          <div className="en">{phrase.en}</div>
-          <button className="audio" onClick={() => audioRef.current?.play()}>▶ Play audio</button>
-          {phrase.note && <Details label="note" text={phrase.note} open={showNote} onToggle={setShowNote} />}
-          {phrase.ru && <Details label="russian" text={phrase.ru} open={showRu} onToggle={setShowRu} />}
-          <div className="grade-row"><button onClick={() => grade("good")}>Got it — review me</button></div>
+
+          {introStep === 0 && (
+            <>
+              <p className="intro-prompt muted">Listen. What do you hear?</p>
+              <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play audio</button>
+              <button onClick={() => setIntroStep(1)}>I heard something →</button>
+            </>
+          )}
+
+          {introStep === 1 && (
+            <>
+              <p className="intro-prompt muted">Here it is in Romanian:</p>
+              <div className="ro big">{phrase.ro}</div>
+              <button className="audio" onClick={() => audioRef.current?.play()}>▶ Hear it again</button>
+              <button onClick={() => setIntroStep(2)}>I can read it →</button>
+            </>
+          )}
+
+          {introStep === 2 && (
+            <>
+              <div className="ro big">{phrase.ro}</div>
+              <div className="en">{phrase.en}</div>
+              <button className="audio" onClick={() => audioRef.current?.play()}>▶ Play audio</button>
+              {phrase.note && <Details label="note" text={phrase.note} open={showNote} onToggle={setShowNote} />}
+              {phrase.ru && <Details label="russian" text={phrase.ru} open={showRu} onToggle={setShowRu} />}
+              <div className="grade-row">
+                <button onClick={() => grade("good")}>Got it — next →</button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     );
   }
 
-  // ── Phrase: type-ro or listen ──────────────────────────────────
-  if (current.kind === "phrase") {
-    const { phrase, mode } = current;
+  // ── Phrase: recognize (multiple choice) ───────────────────────
+  if (current.kind === "phrase" && current.mode === "recognize") {
+    const { phrase } = current;
+    return (
+      <div className="session">
+        {sessionHeader}
+        <div className="card">
+          <div className="badge">which one means…</div>
+          <div className="en big">{phrase.en}</div>
+          <div className="recognize-grid">
+            {recognizeOptions.map(opt => {
+              const isChosen = recognizeChosen === opt;
+              const isCorrectOpt = opt === phrase.ro;
+              let cls = "recognize-opt";
+              if (recognizeChosen) {
+                if (isCorrectOpt) cls += " opt-correct";
+                else if (isChosen) cls += " opt-wrong";
+              }
+              return (
+                <button key={opt} className={cls}
+                  onClick={() => gradeRecognize(opt)}
+                  disabled={recognizeChosen !== null}>
+                  {opt}
+                </button>
+              );
+            })}
+          </div>
+          {recognizeChosen && (
+            <p className="feedback muted">
+              {recognizeChosen === phrase.ro ? "✓ Correct!" : `✗ It's "${phrase.ro}"`}
+            </p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // ── Phrase: listen (2-phase: speak → type) ────────────────────
+  if (current.kind === "phrase" && current.mode === "listen") {
+    const { phrase } = current;
     const src = `${base}audio/${phrase.id}.m4a`;
 
-    function reveal() {
-      setRevealed(true);
-      audioRef.current?.play().catch(() => {});
+    if (listenPhase === "listen") {
+      return (
+        <div className="session">
+          {sessionHeader}
+          <audio ref={audioRef} src={src} preload="auto" playsInline />
+          <div className="card review">
+            <div className="badge">listen & repeat aloud</div>
+            <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play</button>
+            <p className="muted" style={{ fontSize: "0.9rem", margin: 0 }}>
+              Say it out loud before typing. Your mouth needs the practice too.
+            </p>
+            <div className="actions">
+              <button onClick={() => {
+                setListenPhase("type");
+                setTimeout(() => inputRef.current?.focus(), 50);
+              }}>I said it — now type it →</button>
+            </div>
+          </div>
+        </div>
+      );
     }
+
+    // Phase 2: type
+    function reveal() { setRevealed(true); audioRef.current?.play().catch(() => {}); }
     function checkAndReveal() {
       setFeedback(matches(typed, phrase.ro) ? "Yes, that's it." : "Almost — have a look.");
       reveal();
     }
-
     return (
       <div className="session">
-        <button className="exit" onClick={onExit}>← exit</button>
-        <div className="progress">{index + 1} / {queue.length}</div>
+        {sessionHeader}
         <audio ref={audioRef} src={src} preload="auto" playsInline />
         <div className="card review">
-          <div className="badge">{mode === "listen" ? "listen and type what you hear" : "type the Romanian"}</div>
-          {mode === "listen"
-            ? <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play again</button>
-            : <div className="en big">{phrase.en}</div>}
+          <div className="badge">type what you heard</div>
+          <button className="audio" onClick={() => audioRef.current?.play()}>▶ Play again</button>
           {!revealed ? (
             <>
               <input ref={inputRef} type="text" value={typed}
-                onChange={(e) => setTyped(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && checkAndReveal()}
-                placeholder={mode === "listen" ? "what did you hear?" : "type here…"}
+                onChange={e => setTyped(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && checkAndReveal()}
+                placeholder="type here…"
                 autoCapitalize="none" autoCorrect="off" spellCheck={false} />
               <div className="actions">
                 <button onClick={checkAndReveal}>Check</button>
-                <button className="ghost" onClick={() => { setTyped(""); reveal(); }}>
-                  {mode === "listen" ? "Show me" : "I don't know"}
-                </button>
+                <button className="ghost" onClick={() => { setTyped(""); reveal(); }}>Show me</button>
               </div>
             </>
           ) : (
             <RevealPhrase phrase={phrase} feedback={feedback} audio={audioRef}
-              onGrade={(g) => grade(g, false)}
+              onGrade={g => grade(g, false)}
               showRu={showRu} setShowRu={setShowRu}
               showNote={showNote} setShowNote={setShowNote} />
           )}
@@ -220,14 +378,65 @@ export function Session({ state, onUpdate, onExit }: Props) {
     );
   }
 
-  // ── Dialogue: intro ────────────────────────────────────────────
+  // ── Phrase: type-ro (with hints) ──────────────────────────────
+  if (current.kind === "phrase") {
+    const { phrase } = current;
+    const src = `${base}audio/${phrase.id}.m4a`;
+    const words = phrase.ro.split(" ");
+
+    function reveal() { setRevealed(true); audioRef.current?.play().catch(() => {}); }
+    function checkAndReveal() {
+      setFeedback(matches(typed, phrase.ro) ? "Yes, that's it." : "Almost — have a look.");
+      reveal();
+    }
+
+    const hintText = hintCount > 0
+      ? words.slice(0, hintCount).join(" ") + (hintCount < words.length ? "…" : "")
+      : null;
+
+    return (
+      <div className="session">
+        {sessionHeader}
+        <audio ref={audioRef} src={src} preload="auto" playsInline />
+        <div className="card review">
+          <div className="badge">type the Romanian</div>
+          <div className="en big">{phrase.en}</div>
+          {!revealed ? (
+            <>
+              {hintText && <p className="hint-text muted">{hintText}</p>}
+              <input ref={inputRef} type="text" value={typed}
+                onChange={e => setTyped(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && checkAndReveal()}
+                placeholder="type here…"
+                autoCapitalize="none" autoCorrect="off" spellCheck={false} />
+              <div className="actions">
+                <button onClick={checkAndReveal}>Check</button>
+                <button className="ghost" onClick={() => setHintCount(h => Math.min(h + 1, words.length))}>
+                  {hintCount === 0 ? "Hint" : "More…"}
+                </button>
+                <button className="ghost" onClick={() => { setTyped(""); reveal(); }}>Skip</button>
+              </div>
+            </>
+          ) : (
+            <RevealPhrase phrase={phrase} feedback={feedback} audio={audioRef}
+              onGrade={g => grade(g, false)}
+              showRu={showRu} setShowRu={setShowRu}
+              showNote={showNote} setShowNote={setShowNote} />
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // ── Dialogue: intro (cumulative responses) ────────────────────
   if (current.kind === "dlg" && current.mode === "dlg-intro") {
     const { dialogue } = current;
     const promptSrc = `${base}audio/${dialogue.id}-prompt.m4a`;
+    const shown = dialogue.responses.slice(0, dlgResponseCount);
+    const hasMore = dlgResponseCount < dialogue.responses.length;
     return (
       <div className="session">
-        <button className="exit" onClick={onExit}>← exit</button>
-        <div className="progress">{index + 1} / {queue.length}</div>
+        {sessionHeader}
         <audio ref={audioRef} src={promptSrc} preload="auto" playsInline />
         <div className="card intro">
           <div className="badge">new exchange</div>
@@ -235,15 +444,22 @@ export function Session({ state, onUpdate, onExit }: Props) {
           <div className="ro big">{dialogue.prompt}</div>
           <div className="en">{dialogue.promptEn}</div>
           <button className="audio" onClick={() => audioRef.current?.play()}>▶ Hear the prompt</button>
-          <div className="dlg-label muted" style={{ marginTop: 8 }}>you could say:</div>
+          <div className="dlg-label muted" style={{ marginTop: 8 }}>
+            you could say ({dlgResponseCount} of {dialogue.responses.length}):
+          </div>
           <div className="response-list">
-            {dialogue.responses.map((r, i) => (
+            {shown.map((r, i) => (
               <ResponseItem key={i} ro={r.ro} en={r.en}
                 src={`${base}audio/${dialogue.id}-r${i}.m4a`} />
             ))}
           </div>
           {dialogue.note && <Details label="note" text={dialogue.note} open={showNote} onToggle={setShowNote} />}
-          <div className="grade-row"><button onClick={() => grade("good", true)}>Got it — practice me</button></div>
+          <div className="grade-row">
+            {hasMore
+              ? <button onClick={() => setDlgResponseCount(c => c + 1)}>+ Show next option</button>
+              : <button onClick={() => grade("good", true)}>Got it — practice me</button>
+            }
+          </div>
         </div>
       </div>
     );
@@ -255,16 +471,15 @@ export function Session({ state, onUpdate, onExit }: Props) {
     const promptSrc = `${base}audio/${dialogue.id}-prompt.m4a`;
 
     function checkAndRevealDlg() {
-      const hit = dialogue.responses.find((r) => matches(typed, r.ro));
-      setFeedback(hit ? `Yes — "${hit.ro}"` : "Not quite — see the options below.");
+      const hit = dialogue.responses.find(r => matches(typed, r.ro));
+      setFeedback(hit ? `✓ "${hit.ro}"` : "Not quite — see options below.");
       setRevealed(true);
       audioRef.current?.play().catch(() => {});
     }
 
     return (
       <div className="session">
-        <button className="exit" onClick={onExit}>← exit</button>
-        <div className="progress">{index + 1} / {queue.length}</div>
+        {sessionHeader}
         <audio ref={audioRef} src={promptSrc} preload="auto" playsInline />
         <div className="card review">
           <div className="badge">respond</div>
@@ -274,8 +489,8 @@ export function Session({ state, onUpdate, onExit }: Props) {
           {!revealed ? (
             <>
               <input ref={inputRef} type="text" value={typed}
-                onChange={(e) => setTyped(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && checkAndRevealDlg()}
+                onChange={e => setTyped(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && checkAndRevealDlg()}
                 placeholder="your response in Romanian…"
                 autoCapitalize="none" autoCorrect="off" spellCheck={false} />
               <div className="actions">
