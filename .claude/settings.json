@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__granola__get_meeting_transcript",
+      "mcp__granola__list_meetings",
+      "mcp__slite__get-note",
+      "mcp__slite__search-notes",
+      "mcp__slite__get-note-children",
+      "mcp__slite-cloud__get-note",
+      "mcp__slite-cloud__search-notes",
+      "mcp__slite-cloud__get-note-children",
+      "mcp__Claude_Preview__preview_screenshot",
+      "Bash(npm run build)",
+      "Bash(npm run build *)",
+      "Bash(curl -s *)"
+    ]
+  }
+}

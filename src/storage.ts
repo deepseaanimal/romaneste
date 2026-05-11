@@ -80,9 +80,27 @@ export function importState(file: File): Promise<AppState> {
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const parsed = JSON.parse(e.target?.result as string) as AppState;
-        if (!parsed.cards || !parsed.tripDate) throw new Error("Invalid backup file");
-        resolve(parsed);
+        const parsed = JSON.parse(e.target?.result as string);
+        if (typeof parsed !== "object" || parsed === null
+          || typeof parsed.cards !== "object"
+          || typeof parsed.tripDate !== "string"
+          || !/^\d{4}-\d{2}-\d{2}$/.test(parsed.tripDate)) {
+          throw new Error("Invalid backup file");
+        }
+        const merged: AppState = {
+          ...DEFAULT_STATE,
+          ...parsed,
+          cards: { ...(parsed.cards ?? {}) },
+          dlgCards: { ...(parsed.dlgCards ?? {}) },
+          daysStudied: Array.isArray(parsed.daysStudied) ? parsed.daysStudied.filter((d: unknown) => typeof d === "string") : [],
+          newPerDay: Math.max(1, Math.min(50, Number(parsed.newPerDay) || DEFAULT_STATE.newPerDay)),
+          reviewLimit: Math.max(1, Math.min(200, Number(parsed.reviewLimit) || DEFAULT_STATE.reviewLimit)),
+          tripDate: /^\d{4}-\d{2}-\d{2}$/.test(parsed.tripDate) ? parsed.tripDate : DEFAULT_STATE.tripDate,
+          activeScenarios: Array.isArray(parsed.activeScenarios)
+            ? parsed.activeScenarios.filter((s: unknown) => ALL_SCENARIOS.includes(s as Scenario))
+            : DEFAULT_STATE.activeScenarios,
+        };
+        resolve(merged);
       } catch {
         reject(new Error("Could not read backup file"));
       }
