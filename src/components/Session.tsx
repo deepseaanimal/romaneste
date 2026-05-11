@@ -110,6 +110,22 @@ function getRecognizeOptions(phrase: Phrase): string[] {
   return [phrase.ro, ...distractors].sort(() => Math.random() - 0.5);
 }
 
+function buildTilePool(dialogue: Dialogue): string[] {
+  // All unique words from all valid responses
+  const answerWords = [...new Set(
+    dialogue.responses.flatMap(r => r.ro.replace(/[.,!?]/g, "").split(" ").filter(Boolean))
+  )];
+  // Distractors: words from phrase pool not already in answers
+  const answerSet = new Set(answerWords.map(w => w.toLowerCase()));
+  const distractorPool = phrases
+    .flatMap(p => p.ro.replace(/[.,!?]/g, "").split(" "))
+    .filter(w => w.length > 2 && !answerSet.has(w.toLowerCase()));
+  const distractors = [...new Set(distractorPool)]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+  return [...answerWords, ...distractors].sort(() => Math.random() - 0.5);
+}
+
 export function Session({ state, onUpdate, onExit }: Props) {
   const [queue, setQueue] = useState<QueueItem[]>(() => buildQueue(state));
   const [index, setIndex] = useState(0);
@@ -122,12 +138,16 @@ export function Session({ state, onUpdate, onExit }: Props) {
   const [graded, setGraded] = useState(0);
 
   // New UX states
-  const [introStep, setIntroStep] = useState(0);           // 0=listen 1=see-ro 2=see-en+go
+  const [introStep, setIntroStep] = useState(0);
   const [listenPhase, setListenPhase] = useState<"listen" | "type">("listen");
   const [hintCount, setHintCount] = useState(0);
   const [dlgResponseCount, setDlgResponseCount] = useState(1);
   const [recognizeOptions, setRecognizeOptions] = useState<string[]>([]);
   const [recognizeChosen, setRecognizeChosen] = useState<string | null>(null);
+  // Word bank states
+  const [tilePool, setTilePool] = useState<string[]>([]);
+  const [tileBuilt, setTileBuilt] = useState<string[]>([]);
+  const [useTyping, setUseTyping] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -147,11 +167,17 @@ export function Session({ state, onUpdate, onExit }: Props) {
     setHintCount(0);
     setDlgResponseCount(1);
     setRecognizeChosen(null);
+    setTileBuilt([]);
+    setUseTyping(false);
 
     if (!current) return;
 
     if (current.kind === "phrase" && current.mode === "recognize") {
       setRecognizeOptions(getRecognizeOptions(current.phrase));
+    }
+
+    if (current.kind === "dlg" && current.mode === "dlg-respond") {
+      setTilePool(buildTilePool(current.dialogue));
     }
 
     // Auto-focus input for typing modes (not listen phase 1)
@@ -465,43 +491,99 @@ export function Session({ state, onUpdate, onExit }: Props) {
     );
   }
 
-  // ── Dialogue: respond ──────────────────────────────────────────
+  // ── Dialogue: respond (chat bubble + word bank) ───────────────
   if (current.kind === "dlg") {
     const { dialogue } = current;
     const promptSrc = `${base}audio/${dialogue.id}-prompt.m4a`;
 
-    function checkAndRevealDlg() {
-      const hit = dialogue.responses.find(r => matches(typed, r.ro));
+    function checkDlg(sentence: string) {
+      const hit = dialogue.responses.find(r => matches(sentence, r.ro));
       setFeedback(hit ? `✓ "${hit.ro}"` : "Not quite — see options below.");
       setRevealed(true);
       audioRef.current?.play().catch(() => {});
     }
 
+    function addTile(idx: number) {
+      const word = tilePool[idx];
+      setTilePool(p => p.filter((_, i) => i !== idx));
+      setTileBuilt(b => [...b, word]);
+    }
+
+    function removeTile(idx: number) {
+      const word = tileBuilt[idx];
+      setTileBuilt(b => b.filter((_, i) => i !== idx));
+      setTilePool(p => [...p, word].sort(() => Math.random() - 0.5));
+    }
+
+    const builtSentence = tileBuilt.join(" ");
+
     return (
       <div className="session">
         {sessionHeader}
         <audio ref={audioRef} src={promptSrc} preload="auto" playsInline />
-        <div className="card review">
-          <div className="badge">respond</div>
-          <div className="dlg-label muted">they say:</div>
-          <div className="ro big">{dialogue.prompt}</div>
-          <div className="en">{dialogue.promptEn}</div>
-          <button className="audio" onClick={() => audioRef.current?.play()}>▶ Hear again</button>
+        <div className="chat-view">
+
+          {/* Their message */}
+          <div className="bubble-row them">
+            <div className="bubble bubble-them">
+              <div className="bubble-ro">{dialogue.prompt}</div>
+              <div className="bubble-en">{dialogue.promptEn}</div>
+            </div>
+            <button className="audio sm bubble-audio" onClick={() => audioRef.current?.play()}>▶</button>
+          </div>
+
           {!revealed ? (
             <>
-              <input ref={inputRef} type="text" value={typed}
-                onChange={e => setTyped(e.target.value)}
-                onKeyDown={e => e.key === "Enter" && checkAndRevealDlg()}
-                placeholder="your response in Romanian…"
-                autoCapitalize="none" autoCorrect="off" spellCheck={false} />
-              <div className="actions">
-                <button onClick={checkAndRevealDlg}>Check</button>
-                <button className="ghost" onClick={() => { setTyped(""); setRevealed(true); }}>Show me</button>
-              </div>
+              {/* Word bank */}
+              {!useTyping ? (
+                <div className="tile-area">
+                  <div className="tile-built">
+                    {tileBuilt.length === 0
+                      ? <span className="tile-placeholder">tap words to build your reply…</span>
+                      : tileBuilt.map((w, i) => (
+                          <button key={i} className="tile tile-selected" onClick={() => removeTile(i)}>{w}</button>
+                        ))
+                    }
+                  </div>
+                  <div className="tile-pool">
+                    {tilePool.map((w, i) => (
+                      <button key={i} className="tile" onClick={() => addTile(i)}>{w}</button>
+                    ))}
+                  </div>
+                  <div className="actions">
+                    <button onClick={() => checkDlg(builtSentence)} disabled={tileBuilt.length === 0}>Check</button>
+                    <button className="ghost" onClick={() => setUseTyping(true)}>Type instead</button>
+                    <button className="ghost" onClick={() => { setRevealed(true); setFeedback(null); }}>Show me</button>
+                  </div>
+                </div>
+              ) : (
+                /* Typing fallback */
+                <div className="tile-area">
+                  <input ref={inputRef} type="text" value={typed}
+                    onChange={e => setTyped(e.target.value)}
+                    onKeyDown={e => e.key === "Enter" && checkDlg(typed)}
+                    placeholder="type in Romanian…"
+                    autoCapitalize="none" autoCorrect="off" spellCheck={false} />
+                  <div className="actions">
+                    <button onClick={() => checkDlg(typed)}>Check</button>
+                    <button className="ghost" onClick={() => { setRevealed(true); setFeedback(null); }}>Show me</button>
+                  </div>
+                </div>
+              )}
             </>
           ) : (
-            <div className="reveal">
-              {feedback && <p className="feedback muted">{feedback}</p>}
+            <>
+              {/* Their reply bubble (user's attempt or correct answer) */}
+              {(builtSentence || typed) && (
+                <div className="bubble-row me">
+                  <div className={`bubble bubble-me ${feedback && !feedback.startsWith("✓") ? "bubble-wrong" : ""}`}>
+                    {builtSentence || typed}
+                  </div>
+                </div>
+              )}
+
+              {feedback && <p className="feedback muted" style={{ textAlign: "center" }}>{feedback}</p>}
+
               <div className="dlg-label muted">valid responses:</div>
               <div className="response-list">
                 {dialogue.responses.map((r, i) => (
@@ -516,7 +598,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
                 <button className="g-good" onClick={() => grade("good", true)}>Good</button>
                 <button className="g-easy" onClick={() => grade("easy", true)}>Easy</button>
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>
