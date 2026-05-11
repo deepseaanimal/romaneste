@@ -485,6 +485,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
           <div className="badge">respond</div>
           <div className="dlg-label muted">they say:</div>
           <div className="ro big">{dialogue.prompt}</div>
+          <div className="en">{dialogue.promptEn}</div>
           <button className="audio" onClick={() => audioRef.current?.play()}>▶ Hear again</button>
           {!revealed ? (
             <>
