@@ -100,7 +100,8 @@ function buildQueue(state: AppState): QueueItem[] {
   }
   while (newIdx < newItems.length) queue.push(newItems[newIdx++]);
 
-  return queue;
+  // Hard cap: max 12 cards per session
+  return queue.slice(0, 12);
 }
 
 function getRecognizeOptions(phrase: Phrase): string[] {
@@ -139,7 +140,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
 
   // New UX states
   const [introStep, setIntroStep] = useState(0);
-  const [listenPhase, setListenPhase] = useState<"listen" | "type">("listen");
+  const [, setListenPhase] = useState<"listen" | "type">("listen");
   const [hintCount, setHintCount] = useState(0);
   const [dlgResponseCount, setDlgResponseCount] = useState(1);
   const [recognizeOptions, setRecognizeOptions] = useState<string[]>([]);
@@ -259,7 +260,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
     </>
   );
 
-  // ── Phrase: intro (3 micro-steps) ─────────────────────────────
+  // ── Phrase: intro (2 steps: listen → read+translate) ──────────
   if (current.kind === "phrase" && current.mode === "intro") {
     const { phrase } = current;
     const src = `${base}audio/${phrase.id}.m4a`;
@@ -272,30 +273,21 @@ export function Session({ state, onUpdate, onExit }: Props) {
 
           {introStep === 0 && (
             <>
-              <p className="intro-prompt muted">Listen. What do you hear?</p>
+              <p className="intro-prompt muted">Listen first.</p>
               <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play audio</button>
-              <button onClick={() => setIntroStep(1)}>I heard something →</button>
+              <button onClick={() => setIntroStep(1)}>Show me →</button>
             </>
           )}
 
-          {introStep === 1 && (
-            <>
-              <p className="intro-prompt muted">Here it is in Romanian:</p>
-              <div className="ro big">{phrase.ro}</div>
-              <button className="audio" onClick={() => audioRef.current?.play()}>▶ Hear it again</button>
-              <button onClick={() => setIntroStep(2)}>I can read it →</button>
-            </>
-          )}
-
-          {introStep === 2 && (
+          {introStep >= 1 && (
             <>
               <div className="ro big">{phrase.ro}</div>
               <div className="en">{phrase.en}</div>
-              <button className="audio" onClick={() => audioRef.current?.play()}>▶ Play audio</button>
+              <button className="audio" onClick={() => audioRef.current?.play()}>▶ Hear it again</button>
               {phrase.note && <Details label="note" text={phrase.note} open={showNote} onToggle={setShowNote} />}
               {phrase.ru && <Details label="russian" text={phrase.ru} open={showRu} onToggle={setShowRu} />}
               <div className="grade-row">
-                <button onClick={() => grade("good")}>Got it — next →</button>
+                <button onClick={() => grade("good")}>Got it →</button>
               </div>
             </>
           )}
@@ -341,60 +333,23 @@ export function Session({ state, onUpdate, onExit }: Props) {
     );
   }
 
-  // ── Phrase: listen (2-phase: speak → type) ────────────────────
+  // ── Phrase: listen (hear → see → grade, no typing) ───────────
   if (current.kind === "phrase" && current.mode === "listen") {
     const { phrase } = current;
     const src = `${base}audio/${phrase.id}.m4a`;
-
-    if (listenPhase === "listen") {
-      return (
-        <div className="session">
-          {sessionHeader}
-          <audio ref={audioRef} src={src} preload="auto" playsInline />
-          <div className="card review">
-            <div className="badge">listen & repeat aloud</div>
-            <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play</button>
-            <p className="muted" style={{ fontSize: "0.9rem", margin: 0 }}>
-              Say it out loud before typing. Your mouth needs the practice too.
-            </p>
-            <div className="actions">
-              <button onClick={() => {
-                setListenPhase("type");
-                setTimeout(() => inputRef.current?.focus(), 50);
-              }}>I said it — now type it →</button>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    // Phase 2: type
-    function reveal() { setRevealed(true); audioRef.current?.play().catch(() => {}); }
-    function checkAndReveal() {
-      setFeedback(matches(typed, phrase.ro) ? "Yes, that's it." : "Almost — have a look.");
-      reveal();
-    }
     return (
       <div className="session">
         {sessionHeader}
         <audio ref={audioRef} src={src} preload="auto" playsInline />
         <div className="card review">
-          <div className="badge">type what you heard</div>
-          <button className="audio" onClick={() => audioRef.current?.play()}>▶ Play again</button>
+          <div className="badge">listen & say aloud</div>
+          <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play</button>
           {!revealed ? (
-            <>
-              <input ref={inputRef} type="text" value={typed}
-                onChange={e => setTyped(e.target.value)}
-                onKeyDown={e => e.key === "Enter" && checkAndReveal()}
-                placeholder="type here…"
-                autoCapitalize="none" autoCorrect="off" spellCheck={false} />
-              <div className="actions">
-                <button onClick={checkAndReveal}>Check</button>
-                <button className="ghost" onClick={() => { setTyped(""); reveal(); }}>Show me</button>
-              </div>
-            </>
+            <div className="actions">
+              <button onClick={() => { setRevealed(true); }}>Show me</button>
+            </div>
           ) : (
-            <RevealPhrase phrase={phrase} feedback={feedback} audio={audioRef}
+            <RevealPhrase phrase={phrase} feedback={null} audio={audioRef}
               onGrade={g => grade(g, false)}
               showRu={showRu} setShowRu={setShowRu}
               showNote={showNote} setShowNote={setShowNote} />
