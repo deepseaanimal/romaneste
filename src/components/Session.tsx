@@ -273,6 +273,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
 
           {introStep === 0 && (
             <>
+              {phrase.context && <p className="context-scene">📍 {phrase.context}</p>}
               <p className="intro-prompt muted">Listen first.</p>
               <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play audio</button>
               <button onClick={() => setIntroStep(1)}>Show me →</button>
@@ -281,6 +282,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
 
           {introStep >= 1 && (
             <>
+              {phrase.context && <p className="context-scene">📍 {phrase.context}</p>}
               <div className="ro big">{phrase.ro}</div>
               <div className="en">{phrase.en}</div>
               <button className="audio" onClick={() => audioRef.current?.play()}>▶ Hear it again</button>
@@ -343,6 +345,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
         <audio ref={audioRef} src={src} preload="auto" playsInline />
         <div className="card review">
           <div className="badge">do you recognize it?</div>
+          {phrase.context && <p className="context-scene">📍 {phrase.context}</p>}
           <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>This means:</p>
           <div className="en big">{phrase.en}</div>
           <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play</button>
@@ -391,6 +394,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
         <audio ref={audioRef} src={src} preload="auto" playsInline />
         <div className="card review">
           <div className="badge">type the Romanian</div>
+          {phrase.context && <p className="context-scene">📍 {phrase.context}</p>}
           <div className="en big">{phrase.en}</div>
           {!revealed ? (
             <>

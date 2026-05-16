@@ -34,6 +34,7 @@ export interface Phrase {
   en: string;
   ru?: string;
   note?: string;
+  context?: string;
 }
 
 export type Grade = "again" | "hard" | "good" | "easy";

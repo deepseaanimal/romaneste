@@ -5,7 +5,8 @@
     "ro": "Bună ziua.",
     "en": "Hello. (formal, lit. 'good day')",
     "ru": "Здравствуйте.",
-    "note": "Default polite greeting. Use with strangers, shopkeepers, officials. Informal version: just 'Bună.'"
+    "note": "Default polite greeting. Use with strangers, shopkeepers, officials. Informal version: just 'Bună.'",
+    "context": "You walk into a pharmacy. The woman behind the counter looks up at you."
   },
   {
     "id": "g02",
@@ -13,14 +14,16 @@
     "ro": "Salut.",
     "en": "Hi. (casual)",
     "ru": "Привет.",
-    "note": "Friends and peers only. Don't say this at customs."
+    "note": "Friends and peers only. Don't say this at customs.",
+    "context": "You spot your tutor's friend at the café. You've met once before."
   },
   {
     "id": "g03",
     "scenario": "greetings",
     "ro": "La revedere.",
     "en": "Goodbye.",
-    "ru": "До свидания."
+    "ru": "До свидания.",
+    "context": "You've paid at the market stall. The seller wraps up your vegetables and smiles."
   },
   {
     "id": "g04",
@@ -28,7 +31,8 @@
     "ro": "Mulțumesc.",
     "en": "Thank you.",
     "ru": "Спасибо.",
-    "note": "Add 'mult' for 'thanks a lot': 'Mulțumesc mult.'"
+    "note": "Add 'mult' for 'thanks a lot': 'Mulțumesc mult.'",
+    "context": "The waiter brings your coffee. You look up and say:"
   },
   {
     "id": "g05",
@@ -36,14 +40,16 @@
     "ro": "Vă rog.",
     "en": "Please. / You're welcome.",
     "ru": "Пожалуйста.",
-    "note": "Polite form. Informal is 'te rog'. Literally 'I ask you'."
+    "note": "Polite form. Informal is 'te rog'. Literally 'I ask you'.",
+    "context": "You point at the item behind the glass and slide your money across the counter."
   },
   {
     "id": "g06",
     "scenario": "greetings",
     "ro": "Cu plăcere.",
     "en": "You're welcome. (lit. 'with pleasure')",
-    "ru": "Пожалуйста. / С удовольствием."
+    "ru": "Пожалуйста. / С удовольствием.",
+    "context": "Someone thanks you for holding the lift door. You smile and say:"
   },
   {
     "id": "g07",
@@ -51,7 +57,8 @@
     "ro": "Mă scuzați.",
     "en": "Excuse me. (formal)",
     "ru": "Извините.",
-    "note": "Use to get attention or apologize. Informal: 'scuză-mă'."
+    "note": "Use to get attention or apologize. Informal: 'scuză-mă'.",
+    "context": "Crowded trolleybus. You need to squeeze past someone to reach the door."
   },
   {
     "id": "g08",
@@ -59,7 +66,8 @@
     "ro": "Îmi pare rău.",
     "en": "I'm sorry.",
     "ru": "Мне жаль. / Извините.",
-    "note": "Lit. 'it seems bad to me'. Use for genuine apology, not just bumping someone."
+    "note": "Lit. 'it seems bad to me'. Use for genuine apology, not just bumping someone.",
+    "context": "You accidentally knock someone's coffee off the table in a café. They look up."
   },
   {
     "id": "g09",
@@ -67,14 +75,16 @@
     "ro": "Da.",
     "en": "Yes.",
     "ru": "Да.",
-    "note": "Slavic loan — same word as Russian 'да'."
+    "note": "Slavic loan — same word as Russian 'да'.",
+    "context": "The customs officer asks: 'Is this your first visit to Moldova?'"
   },
   {
     "id": "g10",
     "scenario": "greetings",
     "ro": "Nu.",
     "en": "No.",
-    "ru": "Нет."
+    "ru": "Нет.",
+    "context": "A street vendor holds out a souvenir and asks if you want to buy it."
   },
 
   {
@@ -83,7 +93,8 @@
     "ro": "Vorbiți engleză?",
     "en": "Do you speak English?",
     "ru": "Вы говорите по-английски?",
-    "note": "Formal 'you'. 'Vorbiți' is the polite form of 'speak'."
+    "note": "Formal 'you'. 'Vorbiți' is the polite form of 'speak'.",
+    "context": "The pharmacist starts explaining your medication in rapid Romanian. You're lost."
   },
   {
     "id": "l02",
@@ -91,42 +102,48 @@
     "ro": "Vorbiți rusă?",
     "en": "Do you speak Russian?",
     "ru": "Вы говорите по-русски?",
-    "note": "Useful in Moldova — Russian is widely understood."
+    "note": "Useful in Moldova — Russian is widely understood.",
+    "context": "You're lost and stop someone on the street. Romanian isn't working. Try Russian."
   },
   {
     "id": "l03",
     "scenario": "language",
     "ro": "Nu vorbesc românește.",
     "en": "I don't speak Romanian.",
-    "ru": "Я не говорю по-румынски."
+    "ru": "Я не говорю по-румынски.",
+    "context": "Someone speaks to you at length, clearly expecting a response. Be honest."
   },
   {
     "id": "l04",
     "scenario": "language",
     "ro": "Vorbesc puțin.",
     "en": "I speak a little.",
-    "ru": "Я говорю немного."
+    "ru": "Я говорю немного.",
+    "context": "The shopkeeper asks if you speak Romanian. You don't want to say no completely."
   },
   {
     "id": "l05",
     "scenario": "language",
     "ro": "Nu înțeleg.",
     "en": "I don't understand.",
-    "ru": "Я не понимаю."
+    "ru": "Я не понимаю.",
+    "context": "A taxi driver explains something, gesturing at the road. You have absolutely no idea."
   },
   {
     "id": "l06",
     "scenario": "language",
     "ro": "Puteți să repetați, vă rog?",
     "en": "Can you repeat, please?",
-    "ru": "Повторите, пожалуйста."
+    "ru": "Повторите, пожалуйста.",
+    "context": "The woman at the counter said the price but it was too fast. You need to hear it again."
   },
   {
     "id": "l07",
     "scenario": "language",
     "ro": "Puteți să vorbiți mai rar?",
     "en": "Can you speak more slowly?",
-    "ru": "Можете говорить медленнее?"
+    "ru": "Можете говорить медленнее?",
+    "context": "Your host is giving you directions to the market. Way too fast. You need to slow them down."
   },
 
   {
@@ -134,7 +151,8 @@
     "scenario": "customs",
     "ro": "Sunt aici pentru turism.",
     "en": "I'm here for tourism.",
-    "ru": "Я здесь как турист."
+    "ru": "Я здесь как турист.",
+    "context": "Border control. The officer looks at your passport and asks why you're visiting."
   },
   {
     "id": "c02",
@@ -142,7 +160,8 @@
     "ro": "Stau o săptămână.",
     "en": "I'm staying one week.",
     "ru": "Я остаюсь на неделю.",
-    "note": "Swap 'o săptămână' for 'două săptămâni' (two weeks) or 'zece zile' (ten days)."
+    "note": "Swap 'o săptămână' for 'două săptămâni' (two weeks) or 'zece zile' (ten days).",
+    "context": "The officer is still looking at you. Now she asks how long you're staying."
   },
   {
     "id": "c03",
@@ -150,21 +169,24 @@
     "ro": "Acesta este pașaportul meu.",
     "en": "This is my passport.",
     "ru": "Вот мой паспорт.",
-    "note": "Definite article in Romanian is a SUFFIX: 'pașaport' → 'pașaportul' (the passport)."
+    "note": "Definite article in Romanian is a SUFFIX: 'pașaport' → 'pașaportul' (the passport).",
+    "context": "The guard at the desk holds out his hand without looking up."
   },
   {
     "id": "c04",
     "scenario": "customs",
     "ro": "Nu am nimic de declarat.",
     "en": "I have nothing to declare.",
-    "ru": "Мне нечего декларировать."
+    "ru": "Мне нечего декларировать.",
+    "context": "You approach the green channel at customs. An officer steps forward."
   },
   {
     "id": "c05",
     "scenario": "customs",
     "ro": "Stau la un hotel.",
     "en": "I'm staying at a hotel.",
-    "ru": "Я остановлюсь в отеле."
+    "ru": "Я остановлюсь в отеле.",
+    "context": "Last question before the stamp: where are you staying?"
   },
 
   {
@@ -172,7 +194,8 @@
     "scenario": "shop",
     "ro": "Cât costă?",
     "en": "How much does it cost?",
-    "ru": "Сколько стоит?"
+    "ru": "Сколько стоит?",
+    "context": "Beautiful hand-painted pot at the market. No price tag anywhere."
   },
   {
     "id": "s02",
@@ -180,7 +203,8 @@
     "ro": "Aș dori asta, vă rog.",
     "en": "I would like this, please.",
     "ru": "Я бы хотел/а это, пожалуйста.",
-    "note": "'Aș dori' is the polite conditional 'I would like' — softer than 'vreau' (I want)."
+    "note": "'Aș dori' is the polite conditional 'I would like' — softer than 'vreau' (I want).",
+    "context": "You're at the bakery. You point at the pastry behind the glass."
   },
   {
     "id": "s03",
@@ -188,7 +212,8 @@
     "ro": "Aveți pâine?",
     "en": "Do you have bread?",
     "ru": "У вас есть хлеб?",
-    "note": "Swap 'pâine' for any item: apă (water), lapte (milk), ouă (eggs)."
+    "note": "Swap 'pâine' for any item: apă (water), lapte (milk), ouă (eggs).",
+    "context": "Small corner shop. Shelves are behind the counter. You need to ask."
   },
   {
     "id": "s04",
@@ -196,7 +221,8 @@
     "ro": "Unde este toaleta?",
     "en": "Where is the toilet?",
     "ru": "Где туалет?",
-    "note": "Note the suffix: 'toaletă' (a toilet) → 'toaleta' (the toilet)."
+    "note": "Note the suffix: 'toaletă' (a toilet) → 'toaleta' (the toilet).",
+    "context": "You've been walking Chișinău all day. You step into a café and urgently need a bathroom."
   },
   {
     "id": "s05",
@@ -204,7 +230,8 @@
     "ro": "Apă plată, vă rog.",
     "en": "Still water, please.",
     "ru": "Воду без газа, пожалуйста.",
-    "note": "'Apă plată' = still water; 'apă minerală' = sparkling. Important — defaults vary."
+    "note": "'Apă plată' = still water; 'apă minerală' = sparkling. Important — defaults vary.",
+    "context": "You sit down at a restaurant table. The waiter approaches with a notepad."
   },
   {
     "id": "s06",
@@ -212,14 +239,16 @@
     "ro": "O cafea, vă rog.",
     "en": "A coffee, please.",
     "ru": "Один кофе, пожалуйста.",
-    "note": "'O' is the indefinite article for feminine nouns; 'un' for masculine. 'Cafea' is feminine."
+    "note": "'O' is the indefinite article for feminine nouns; 'un' for masculine. 'Cafea' is feminine.",
+    "context": "Morning. Small café near your hotel. One other customer. The barista looks at you."
   },
   {
     "id": "s07",
     "scenario": "shop",
     "ro": "Plătesc cu cardul.",
     "en": "I'll pay by card.",
-    "ru": "Я плачу картой."
+    "ru": "Я плачу картой.",
+    "context": "At the checkout. The cashier says the total. You reach for your phone."
   },
   {
     "id": "s08",
@@ -227,14 +256,16 @@
     "ro": "Plătesc cu numerar.",
     "en": "I'll pay in cash.",
     "ru": "Я плачу наличными.",
-    "note": "Moldova: cash still common at markets, ATMs widely available in cities."
+    "note": "Moldova: cash still common at markets, ATMs widely available in cities.",
+    "context": "Market stall. Seller looks doubtful when she sees your phone. You pull out cash instead."
   },
   {
     "id": "s09",
     "scenario": "shop",
     "ro": "Bonul, vă rog.",
     "en": "The receipt, please.",
-    "ru": "Чек, пожалуйста."
+    "ru": "Чек, пожалуйста.",
+    "context": "Transaction done. The cashier is already looking at the next customer. You need the receipt."
   },
   {
     "id": "s10",
@@ -257,28 +288,32 @@
     "scenario": "restaurant",
     "ro": "Meniul, vă rog.",
     "en": "The menu, please.",
-    "ru": "Меню, пожалуйста."
+    "ru": "Меню, пожалуйста.",
+    "context": "You sit down at a restaurant table. The waiter approaches and asks what you'd like."
   },
   {
     "id": "r03",
     "scenario": "restaurant",
     "ro": "Ce recomandați?",
     "en": "What do you recommend?",
-    "ru": "Что вы рекомендуете?"
+    "ru": "Что вы рекомендуете?",
+    "context": "The menu is all in Romanian. You decide to just trust the waiter."
   },
   {
     "id": "r04",
     "scenario": "restaurant",
     "ro": "Este foarte bun.",
     "en": "It's very good.",
-    "ru": "Очень вкусно."
+    "ru": "Очень вкусно.",
+    "context": "The waiter passes by and nods at your plate, asking silently if everything is ok."
   },
   {
     "id": "r05",
     "scenario": "restaurant",
     "ro": "Nota, vă rog.",
     "en": "The bill, please.",
-    "ru": "Счёт, пожалуйста."
+    "ru": "Счёт, пожалуйста.",
+    "context": "You've finished. You catch the waiter's eye across the room."
   },
 
   {
@@ -286,14 +321,16 @@
     "scenario": "help",
     "ro": "Ajutor!",
     "en": "Help!",
-    "ru": "Помогите!"
+    "ru": "Помогите!",
+    "context": "You slip on wet cobblestones near the market. People are walking past."
   },
   {
     "id": "h02",
     "scenario": "help",
     "ro": "Mă simt rău.",
     "en": "I feel ill.",
-    "ru": "Мне плохо."
+    "ru": "Мне плохо.",
+    "context": "The heat and unfamiliar food have caught up with you. You need to sit and explain."
   },
   {
     "id": "h03",
@@ -301,21 +338,24 @@
     "ro": "Aveți nevoie de ajutor?",
     "en": "Do you need help?",
     "ru": "Вам нужна помощь?",
-    "note": "Worth recognizing — someone may say this to you."
+    "note": "Worth recognizing — someone may say this to you.",
+    "context": "An elderly woman is struggling with heavy bags at the bus stop. You approach."
   },
   {
     "id": "h04",
     "scenario": "help",
     "ro": "Unde este farmacia?",
     "en": "Where is the pharmacy?",
-    "ru": "Где аптека?"
+    "ru": "Где аптека?",
+    "context": "You have a headache and no medicine. You stop someone on the street."
   },
   {
     "id": "h05",
     "scenario": "help",
     "ro": "Sunați la poliție.",
     "en": "Call the police.",
-    "ru": "Вызовите полицию."
+    "ru": "Вызовите полицию.",
+    "context": "Your bag has been snatched. A bystander is frozen. You need them to act."
   },
 
   {
@@ -704,35 +744,35 @@
     "note": "Dates: 'pe primul' = on the first. 'Pe doi iulie' = on July 2nd."
   },
 
-  { "id": "bk01", "scenario": "bank", "ro": "Vreau să schimb bani.", "en": "I want to exchange money.", "ru": "Я хочу обменять деньги." },
-  { "id": "bk02", "scenario": "bank", "ro": "Care este cursul de schimb?", "en": "What is the exchange rate?", "ru": "Какой курс обмена?", "note": "'Curs de schimb' = exchange rate. Ask this before exchanging — rates vary a lot between banks and exchange offices." },
-  { "id": "bk03", "scenario": "bank", "ro": "Vreau să deschid un cont.", "en": "I want to open an account.", "ru": "Я хочу открыть счёт." },
-  { "id": "bk04", "scenario": "bank", "ro": "Vreau să retrag bani.", "en": "I want to withdraw money.", "ru": "Я хочу снять деньги.", "note": "'A retrage' = to withdraw. ATM = 'bancomat'." },
-  { "id": "bk05", "scenario": "bank", "ro": "Vreau să depun bani.", "en": "I want to deposit money.", "ru": "Я хочу положить деньги на счёт." },
-  { "id": "bk06", "scenario": "bank", "ro": "Pot plăti cu cardul?", "en": "Can I pay by card?", "ru": "Могу ли я заплатить картой?", "note": "'Card' is used — same word as in English/Russian." },
-  { "id": "bk07", "scenario": "bank", "ro": "Unde este bancomatul cel mai apropiat?", "en": "Where is the nearest ATM?", "ru": "Где ближайший банкомат?", "note": "'Bancomat' = ATM. 'Cel mai apropiat' = nearest." },
-  { "id": "bk08", "scenario": "bank", "ro": "Care este comisionul?", "en": "What is the fee?", "ru": "Какая комиссия?" },
-  { "id": "bk09", "scenario": "bank", "ro": "Vreau să fac un transfer.", "en": "I want to make a transfer.", "ru": "Я хочу сделать перевод." },
-  { "id": "bk10", "scenario": "bank", "ro": "Câți lei primiți pe un dolar?", "en": "How many lei do you give per dollar?", "ru": "Сколько леев за доллар?", "note": "Direct way to ask the rate when exchanging USD. Swap 'dolar' for 'euro' as needed." },
+  { "id": "bk01", "scenario": "bank", "ro": "Vreau să schimb bani.", "en": "I want to exchange money.", "ru": "Я хочу обменять деньги.", "context": "You walk up to the bank counter with dollars in hand." },
+  { "id": "bk02", "scenario": "bank", "ro": "Care este cursul de schimb?", "en": "What is the exchange rate?", "ru": "Какой курс обмена?", "note": "'Curs de schimb' = exchange rate. Ask this before exchanging — rates vary a lot between banks and exchange offices.", "context": "Before handing over your cash, you need to know today's rate." },
+  { "id": "bk03", "scenario": "bank", "ro": "Vreau să deschid un cont.", "en": "I want to open an account.", "ru": "Я хочу открыть счёт.", "context": "You'll be staying a while. You sit down at the bank officer's desk." },
+  { "id": "bk04", "scenario": "bank", "ro": "Vreau să retrag bani.", "en": "I want to withdraw money.", "ru": "Я хочу снять деньги.", "note": "'A retrage' = to withdraw. ATM = 'bancomat'.", "context": "The ATM ate your card. You go inside to the teller window." },
+  { "id": "bk05", "scenario": "bank", "ro": "Vreau să depun bani.", "en": "I want to deposit money.", "ru": "Я хочу положить деньги на счёт.", "context": "You just got paid in cash and want to put it in your account." },
+  { "id": "bk06", "scenario": "bank", "ro": "Pot plăti cu cardul?", "en": "Can I pay by card?", "ru": "Могу ли я заплатить картой?", "note": "'Card' is used — same word as in English/Russian.", "context": "Small restaurant. No card reader visible anywhere. Better to ask before ordering." },
+  { "id": "bk07", "scenario": "bank", "ro": "Unde este bancomatul cel mai apropiat?", "en": "Where is the nearest ATM?", "ru": "Где ближайший банкомат?", "note": "'Bancomat' = ATM. 'Cel mai apropiat' = nearest.", "context": "Your cash ran out at the market. You stop a passerby." },
+  { "id": "bk08", "scenario": "bank", "ro": "Care este comisionul?", "en": "What is the fee?", "ru": "Какая комиссия?", "context": "The teller is about to process your exchange. You want to know the full cost first." },
+  { "id": "bk09", "scenario": "bank", "ro": "Vreau să fac un transfer.", "en": "I want to make a transfer.", "ru": "Я хочу сделать перевод.", "context": "You need to send money home. You approach the bank window." },
+  { "id": "bk10", "scenario": "bank", "ro": "Câți lei primiți pe un dolar?", "en": "How many lei do you give per dollar?", "ru": "Сколько леев за доллар?", "note": "Direct way to ask the rate when exchanging USD. Swap 'dolar' for 'euro' as needed.", "context": "Exchange office near the central market. You have $200 to change." },
 
-  { "id": "doc01", "scenario": "documents", "ro": "Vreau să îmi reînnoiesc buletinul.", "en": "I want to renew my ID card.", "ru": "Я хочу продлить удостоверение личности.", "note": "'Buletin' = Moldovan national ID card. 'A reînnoi' = to renew." },
-  { "id": "doc02", "scenario": "documents", "ro": "Ce acte am nevoie?", "en": "What documents do I need?", "ru": "Какие документы мне нужны?", "note": "'Acte' = documents/papers. Very useful at any government office." },
-  { "id": "doc03", "scenario": "documents", "ro": "Unde este ghișeul?", "en": "Where is the counter/window?", "ru": "Где окошко (стойка)?", "note": "'Ghișeu' = service window at a bank, post office, or government office." },
-  { "id": "doc04", "scenario": "documents", "ro": "Câte zile durează?", "en": "How many days does it take?", "ru": "Сколько дней это занимает?", "note": "'A dura' = to take (time). Can also say 'Cât durează?' = How long does it take?" },
-  { "id": "doc05", "scenario": "documents", "ro": "Trebuie să completez un formular?", "en": "Do I need to fill out a form?", "ru": "Мне нужно заполнить анкету?", "note": "'Formular' = form. 'A completa' = to fill in/out." },
-  { "id": "doc06", "scenario": "documents", "ro": "Am o programare la ora unsprezece.", "en": "I have an appointment at eleven o'clock.", "ru": "У меня запись на одиннадцать.", "note": "Swap the time as needed. 'Programare' = appointment/booking." },
-  { "id": "doc07", "scenario": "documents", "ro": "Pot face o programare online?", "en": "Can I make an appointment online?", "ru": "Могу ли я записаться онлайн?" },
-  { "id": "doc08", "scenario": "documents", "ro": "Pașaportul meu a expirat.", "en": "My passport has expired.", "ru": "Мой паспорт истёк.", "note": "'A expira' = to expire. Same for buletin: 'Buletinul meu a expirat.'" },
-  { "id": "doc09", "scenario": "documents", "ro": "Unde este primăria?", "en": "Where is the city hall?", "ru": "Где мэрия?", "note": "'Primărie' = city hall / municipal office. Many document services go through here." },
-  { "id": "doc10", "scenario": "documents", "ro": "Iată documentele mele.", "en": "Here are my documents.", "ru": "Вот мои документы.", "note": "'Iată' = here is / here are. Useful when handing papers to an official." },
+  { "id": "doc01", "scenario": "documents", "ro": "Vreau să îmi reînnoiesc buletinul.", "en": "I want to renew my ID card.", "ru": "Я хочу продлить удостоверение личности.", "note": "'Buletin' = Moldovan national ID card. 'A reînnoi' = to renew.", "context": "You're at the desk at the civil registry office. The clerk looks up at you." },
+  { "id": "doc02", "scenario": "documents", "ro": "Ce acte am nevoie?", "en": "What documents do I need?", "ru": "Какие документы мне нужны?", "note": "'Acte' = documents/papers. Very useful at any government office.", "context": "You called ahead but didn't understand everything. Now you're at the window." },
+  { "id": "doc03", "scenario": "documents", "ro": "Unde este ghișeul?", "en": "Where is the counter/window?", "ru": "Где окошко (стойка)?", "note": "'Ghișeu' = service window at a bank, post office, or government office.", "context": "Large government building. Many rooms. You're not sure which window to queue at." },
+  { "id": "doc04", "scenario": "documents", "ro": "Câte zile durează?", "en": "How many days does it take?", "ru": "Сколько дней это занимает?", "note": "'A dura' = to take (time). Can also say 'Cât durează?' = How long does it take?", "context": "You submitted your documents. Now you need to know when to come back." },
+  { "id": "doc05", "scenario": "documents", "ro": "Trebuie să completez un formular?", "en": "Do I need to fill out a form?", "ru": "Мне нужно заполнить анкету?", "note": "'Formular' = form. 'A completa' = to fill in/out.", "context": "The clerk is explaining the process. You want to make sure you understand the steps." },
+  { "id": "doc06", "scenario": "documents", "ro": "Am o programare la ora unsprezece.", "en": "I have an appointment at eleven o'clock.", "ru": "У меня запись на одиннадцать.", "note": "Swap the time as needed. 'Programare' = appointment/booking.", "context": "You arrive at the office. The receptionist asks if you have an appointment." },
+  { "id": "doc07", "scenario": "documents", "ro": "Pot face o programare online?", "en": "Can I make an appointment online?", "ru": "Могу ли я записаться онлайн?", "context": "You don't want to queue. You ask the clerk if there's a faster way." },
+  { "id": "doc08", "scenario": "documents", "ro": "Pașaportul meu a expirat.", "en": "My passport has expired.", "ru": "Мой паспорт истёк.", "note": "'A expira' = to expire. Same for buletin: 'Buletinul meu a expirat.'", "context": "You're explaining to the officer why you need a new document." },
+  { "id": "doc09", "scenario": "documents", "ro": "Unde este primăria?", "en": "Where is the city hall?", "ru": "Где мэрия?", "note": "'Primărie' = city hall / municipal office. Many document services go through here.", "context": "You need to register something officially. You stop someone on the street to ask." },
+  { "id": "doc10", "scenario": "documents", "ro": "Iată documentele mele.", "en": "Here are my documents.", "ru": "Вот мои документы.", "note": "'Iată' = here is / here are. Useful when handing papers to an official.", "context": "The clerk holds out her hand. You open your folder." },
 
-  { "id": "cx01", "scenario": "complex", "ro": "Mulțumesc frumos pentru ajutor.", "en": "Thank you very much for your help.", "ru": "Большое спасибо за помощь.", "note": "'Frumos' (beautiful) added after 'mulțumesc' makes it warmer — like 'thank you kindly'." },
-  { "id": "cx02", "scenario": "complex", "ro": "Nu am înțeles. Puteți repeta, vă rog?", "en": "I didn't understand. Can you repeat, please?", "ru": "Я не понял(а). Повторите, пожалуйста.", "note": "Combines 'nu înțeleg' (present) with perfect tense — 'nu am înțeles' = I didn't understand (just now)." },
-  { "id": "cx03", "scenario": "complex", "ro": "Pot să vă pun o întrebare?", "en": "May I ask you a question?", "ru": "Могу я задать вам вопрос?", "note": "Polite way to open a conversation with a stranger or official." },
-  { "id": "cx04", "scenario": "complex", "ro": "Îmi pare rău, am întârziat.", "en": "I'm sorry, I'm late.", "ru": "Извините, я опоздал(а).", "note": "'Îmi pare rău' = I'm sorry. 'A întârzia' = to be late." },
-  { "id": "cx05", "scenario": "complex", "ro": "Unde pot găsi un loc să mănânc?", "en": "Where can I find a place to eat?", "ru": "Где я могу найти место поесть?", "note": "'A găsi' = to find. 'A mânca' = to eat. 'Loc' = place." },
-  { "id": "cx06", "scenario": "complex", "ro": "Cât timp durează până la centru?", "en": "How long does it take to get to the center?", "ru": "Сколько времени до центра?", "note": "Building on time vocab. 'Centru' = city center. Swap for any destination." },
-  { "id": "cx07", "scenario": "complex", "ro": "Vorbiți română sau rusă?", "en": "Do you speak Romanian or Russian?", "ru": "Вы говорите по-румынски или по-русски?", "note": "Moldova is bilingual. Useful opener — many people are more comfortable in Russian." },
+  { "id": "cx01", "scenario": "complex", "ro": "Mulțumesc frumos pentru ajutor.", "en": "Thank you very much for your help.", "ru": "Большое спасибо за помощь.", "note": "'Frumos' (beautiful) added after 'mulțumesc' makes it warmer — like 'thank you kindly'.", "context": "A stranger spent 10 minutes helping you find the right bus. You're genuinely grateful." },
+  { "id": "cx02", "scenario": "complex", "ro": "Nu am înțeles. Puteți repeta, vă rog?", "en": "I didn't understand. Can you repeat, please?", "ru": "Я не понял(а). Повторите, пожалуйста.", "note": "Combines 'nu înțeleg' (present) with perfect tense — 'nu am înțeles' = I didn't understand (just now).", "context": "The official just explained something important. You caught almost none of it." },
+  { "id": "cx03", "scenario": "complex", "ro": "Pot să vă pun o întrebare?", "en": "May I ask you a question?", "ru": "Могу я задать вам вопрос?", "note": "Polite way to open a conversation with a stranger or official.", "context": "You need to interrupt someone who looks busy. This is the polite opener." },
+  { "id": "cx04", "scenario": "complex", "ro": "Îmi pare rău, am întârziat.", "en": "I'm sorry, I'm late.", "ru": "Извините, я опоздал(а).", "note": "'Îmi pare rău' = I'm sorry. 'A întârzia' = to be late.", "context": "You rush into your tutor's apartment 15 minutes late. She opens the door." },
+  { "id": "cx05", "scenario": "complex", "ro": "Unde pot găsi un loc să mănânc?", "en": "Where can I find a place to eat?", "ru": "Где я могу найти место поесть?", "note": "'A găsi' = to find. 'A mânca' = to eat. 'Loc' = place.", "context": "It's 1pm, you don't know the neighbourhood, and you're starving." },
+  { "id": "cx06", "scenario": "complex", "ro": "Cât timp durează până la centru?", "en": "How long does it take to get to the center?", "ru": "Сколько времени до центра?", "note": "Building on time vocab. 'Centru' = city center. Swap for any destination.", "context": "You're at a bus stop outside the city. Trying to plan your day." },
+  { "id": "cx07", "scenario": "complex", "ro": "Vorbiți română sau rusă?", "en": "Do you speak Romanian or Russian?", "ru": "Вы говорите по-румынски или по-русски?", "note": "Moldova is bilingual. Useful opener — many people are more comfortable in Russian.", "context": "You meet someone new and don't know which language to use." },
 
   { "id": "num-13", "scenario": "numbers", "ro": "treisprezece", "en": "thirteen (13)", "ru": "тринадцать", "note": "Pattern: trei (3) + spre + zece (10) = 3 towards 10. All 11-19 follow this." },
   { "id": "num-14", "scenario": "numbers", "ro": "paisprezece", "en": "fourteen (14)", "ru": "четырнадцать", "note": "'Pai' is a shortening of 'patru' (4). You'll hear both 'paisprezece' and 'patrusprezece'." },
