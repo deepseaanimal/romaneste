@@ -333,7 +333,7 @@ export function Session({ state, onUpdate, onExit }: Props) {
     );
   }
 
-  // ── Phrase: listen (hear → see → grade, no typing) ───────────
+  // ── Phrase: listen (meaning first → hear → did you get it?) ──
   if (current.kind === "phrase" && current.mode === "listen") {
     const { phrase } = current;
     const src = `${base}audio/${phrase.id}.m4a`;
@@ -342,17 +342,27 @@ export function Session({ state, onUpdate, onExit }: Props) {
         {sessionHeader}
         <audio ref={audioRef} src={src} preload="auto" playsInline />
         <div className="card review">
-          <div className="badge">listen & say aloud</div>
+          <div className="badge">do you recognize it?</div>
+          <p className="muted" style={{ margin: 0, fontSize: "0.9rem" }}>This means:</p>
+          <div className="en big">{phrase.en}</div>
           <button className="audio big" onClick={() => audioRef.current?.play()}>▶ Play</button>
           {!revealed ? (
-            <div className="actions">
-              <button onClick={() => { setRevealed(true); }}>Show me</button>
+            <div className="grade-row" style={{ marginTop: 8 }}>
+              <button className="g-good" onClick={() => { grade("good", false); }}>✓ Got it</button>
+              <button className="g-again" onClick={() => { setRevealed(true); }}>✗ Not sure</button>
             </div>
           ) : (
-            <RevealPhrase phrase={phrase} feedback={null} audio={audioRef}
-              onGrade={g => grade(g, false)}
-              showRu={showRu} setShowRu={setShowRu}
-              showNote={showNote} setShowNote={setShowNote} />
+            <>
+              <div className="ro big">{phrase.ro}</div>
+              {phrase.note && <Details label="note" text={phrase.note} open={showNote} onToggle={setShowNote} />}
+              {phrase.ru && <Details label="russian" text={phrase.ru} open={showRu} onToggle={setShowRu} />}
+              <div className="grade-row">
+                <button className="g-again" onClick={() => grade("again", false)}>Again</button>
+                <button className="g-hard" onClick={() => grade("hard", false)}>Hard</button>
+                <button className="g-good" onClick={() => grade("good", false)}>Good</button>
+                <button className="g-easy" onClick={() => grade("easy", false)}>Easy</button>
+              </div>
+            </>
           )}
         </div>
       </div>
