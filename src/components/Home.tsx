@@ -90,8 +90,11 @@ export function Home({ state, onStart, onExport, onImport, onScenariosChange }: 
 
   const streak = useMemo(() => calcStreak(state.daysStudied), [state.daysStudied]);
   const tripDays = daysUntil(state.tripDate);
-  const sessionSize = stats.dueNow + Math.min(stats.newToday, state.newPerDay + 2);
+  const SESSION_CAP = 12;
+  const rawSession = stats.dueNow + Math.min(stats.newToday, state.newPerDay + 2);
+  const sessionSize = Math.min(rawSession, SESSION_CAP);
   const hasWork = stats.dueNow > 0 || stats.newToday > 0;
+  const backlog = Math.max(0, stats.dueNow - SESSION_CAP);
 
   function toggleScenario(s: Scenario) {
     const next = active.includes(s)
@@ -109,8 +112,8 @@ export function Home({ state, onStart, onExport, onImport, onScenariosChange }: 
 
       <section className="card-summary">
         <div className="stat">
-          <div className="stat-num">{stats.dueNow}</div>
-          <div className="stat-label">due now</div>
+          <div className="stat-num">{sessionSize}</div>
+          <div className="stat-label">today's dose</div>
         </div>
         <div className="stat">
           <div className="stat-num">{stats.inDeck}</div>
@@ -126,14 +129,17 @@ export function Home({ state, onStart, onExport, onImport, onScenariosChange }: 
         </div>
       </section>
 
+      {backlog > 0 && (
+        <p className="muted hint">{backlog} more waiting — today's dose is just {sessionSize}.</p>
+      )}
       {stats.inDeck > 0 && stats.dueNow === 0 && stats.nextReviewAt < Infinity && (
         <p className="muted hint">Next review {formatNextReview(stats.nextReviewAt)}.</p>
       )}
 
       <button className="primary" onClick={onStart} disabled={!hasWork}>
         {hasWork
-          ? `Start session · ${sessionSize} card${sessionSize === 1 ? "" : "s"}`
-          : "All caught up"}
+          ? `Start · ${sessionSize} card${sessionSize === 1 ? "" : "s"}`
+          : "All caught up ✓"}
       </button>
 
       <button className="ghost filter-toggle" onClick={() => setShowFilter(v => !v)}>
